@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>لوحة التحكم — Detektly Academy</title>
+<meta content="لوحة تحكم المتعلم: تقدمك، المسار الحالي، الدرس التالي، الإنجازات. Detektly Academy." name="description"/>
+<link href="brand/logo/fav.ico" rel="icon" type="image/x-icon"/>
+<link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="index.html">الرئيسية</a></li><li><a href="paths.html">المسارات</a></li><li><a href="exercises.html">التمارين</a></li><li><a href="progress.html">تقدّمي</a></li><li><a href="resources.html">الموارد</a></li><li><a href="faq.html">الأسئلة</a></li><li><a href="about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="paths.html"><i class="ph ph-books"></i> المسارات</a><a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="resources.html"><i class="ph ph-link"></i> الموارد</a><a href="faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+<main class="wrap page-content">
+<!-- Welcome -->
+<section class="hero">
+<div class="hero-content">
+<div class="eyebrow"><i class="ph ph-target"></i> لوحة التحكم</div>
+<h1>مرحبًا بك في <span class="text-gradient">رحلتك التعليمية</span></h1>
+<p id="welcomeMsg">تابع تقدمك واستمر من حيث توقفت.</p>
+</div>
+</section>
+<!-- Quick Stats -->
+<section class="section">
+<div class="stat-grid grid-4">
+<div class="stat-card">
+<span class="stat-num" id="dTotal">0</span>
+<span class="stat-label">يوم مكتمل</span>
+</div>
+<div class="stat-card">
+<span class="stat-num" id="dPercent">0%</span>
+<span class="stat-label">التقدم الإجمالي</span>
+</div>
+<div class="stat-card">
+<span class="stat-num" id="dStreak">0</span>
+<span class="stat-label">أيام متواصلة</span>
+</div>
+<div class="stat-card">
+<span class="stat-num" id="dBadges">0</span>
+<span class="stat-label">إنجازات</span>
+</div>
+</div>
+</section>
+<!-- Current Path & Next Lesson -->
+<section class="section">
+<h2 class="mb-3">استمر من حيث توقفت</h2>
+<div class="grid-2" id="continueCards"></div>
+</section>
+<!-- All Paths Progress -->
+<section class="section">
+<h2 class="mb-3">تقدم المسارات</h2>
+<div class="grid-2" id="pathProgress"></div>
+</section>
+<!-- Quick Links -->
+<section class="section">
+<h2 class="mb-3">روابط سريعة</h2>
+<div class="feature-grid">
+<a class="card" href="exercises.html" style="text-decoration:none">
+<h3 style="margin-top:0"><i class="ph ph-pencil-simple"></i> التمارين</h3>
+<p class="muted">اختبر فهمك باختبارات تفاعلية وتمارين عملية.</p>
+</a>
+<a class="card" href="resources.html" style="text-decoration:none">
+<h3 style="margin-top:0"><i class="ph ph-link"></i> الموارد والأدوات</h3>
+<p class="muted">مراجع رسمية وأدوات عملية وقوائم مرجعية.</p>
+</a>
+<a class="card" href="cards.html" style="text-decoration:none">
+<h3 style="margin-top:0"><i class="ph ph-book-open-text"></i> المصطلحات التقنية</h3>
+<p class="muted">أكثر من 80 مصطلحًا تقنيًا مع أمثلة عملية.</p>
+</a>
+</div>
+</section>
+<!-- Achievements -->
+<section class="section">
+<h2 class="mb-3"><i class="ph ph-trophy"></i> الإنجازات</h2>
+<div class="feature-grid" id="dashAchievements"></div>
+</section>
+</main>
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong></p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="js/navigation.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const paths = [
+    { id: 'foundation-28', key: 'seo-geo-foundation-28', name: '<i class="ph ph-plant"></i> المرحلة التأسيسية', total: 28, link: 'seo_geo_foundation_28_day_curriculum.html', color: 'var(--accent)' },
+    { id: 'seo-geo-42', key: 'seo_geo_curriculum_v1', name: '<i class="ph ph-magnifying-glass"></i> إتقان SEO و GEO', total: 42, link: 'seo_geo_42_day_curriculum.html', color: 'var(--purple)' },
+    { id: 'tools', key: 'svp-tools-path', name: '<i class="ph ph-wrench"></i> أدوات ومنصات البحث', total: 14, link: 'path-tools.html', color: 'var(--success)' },
+    { id: 'strategy', key: 'svp-strategy-path', name: '<i class="ph ph-target"></i> استراتيجية الظهور', total: 14, link: 'path-strategy.html', color: 'var(--warning)' }
+  ];
+
+  function getDone(p) {
+    try {
+      const d = JSON.parse(localStorage.getItem(p.key) || '{}');
+      return d.completed ? Object.values(d.completed).filter(Boolean).length : 0;
+    } catch { return 0; }
+  }
+
+  let totalDone = 0, totalAll = 0;
+  const pathData = paths.map(p => {
+    const done = getDone(p);
+    totalDone += done;
+    totalAll += p.total;
+    return { ...p, done, pct: Math.round((done / p.total) * 100) };
+  });
+
+  const pct = totalAll > 0 ? Math.round((totalDone / totalAll) * 100) : 0;
+  document.getElementById('dTotal').textContent = totalDone;
+  document.getElementById('dPercent').textContent = pct + '%';
+
+  // Streak
+  try {
+    const ps = JSON.parse(localStorage.getItem('svp-progress') || '{}');
+    document.getElementById('dStreak').textContent = ps.streak ? (ps.streak.current || 0) : 0;
+  } catch {}
+
+  // Continue learning cards
+  const cont = document.getElementById('continueCards');
+  const active = pathData.filter(p => p.done > 0 && p.done < p.total);
+  const notStarted = pathData.filter(p => p.done === 0);
+
+  if (active.length > 0) {
+    active.forEach(p => {
+      cont.innerHTML += `
+        <a href="${p.link}" class="card" style="text-decoration:none">
+          <h3 style="margin:0 0 8px">${p.name}</h3>
+          <p class="muted text-sm">اليوم ${p.done + 1} من ${p.total} — ${p.pct}% مكتمل</p>
+          <div class="progress-bar mt-1"><div class="progress-fill" style="width:${p.pct}%"></div></div>
+          <span class="btn btn-sm btn-primary mt-2">استمر <i class="ph ph-arrow-left"></i></span>
+        </a>`;
+    });
+  } else if (notStarted.length > 0) {
+    const first = notStarted[0];
+    cont.innerHTML = `
+      <a href="${first.link}" class="card" style="text-decoration:none;grid-column:1/-1">
+        <h3 style="margin:0 0 8px">ابدأ رحلتك: ${first.name}</h3>
+        <p class="muted text-sm">لم تبدأ بعد. اضغط هنا للبدء.</p>
+        <span class="btn btn-sm btn-primary mt-2">ابدأ الآن <i class="ph ph-arrow-left"></i></span>
+      </a>`;
+  } else {
+    cont.innerHTML = `
+      <div class="card" style="text-align:center;grid-column:1/-1;padding:32px">
+        <p style="font-size:2rem;margin-bottom:8px"><i class="ph ph-confetti"></i></p>
+        <h3 style="margin:0 0 8px">أحسنت! أكملت كل المسارات</h3>
+        <p class="muted">أنت الآن Search Visibility Strategist.</p>
+      </div>`;
+  }
+
+  // Path progress cards
+  const pg = document.getElementById('pathProgress');
+  pathData.forEach(p => {
+    pg.innerHTML += `
+      <a href="${p.link}" class="card" style="text-decoration:none">
+        <div class="flex justify-between items-center mb-1">
+          <h4 style="margin:0">${p.name}</h4>
+          <span class="badge">${p.pct}%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${p.pct}%"></div></div>
+        <span class="muted text-sm mt-1" style="display:block">${p.done} / ${p.total} يوم</span>
+      </a>`;
+  });
+
+  // Achievements
+  const achievements = [
+    { title: 'الخطوة الأولى', icon: '<i class="ph ph-rocket-launch"></i>', t: 1 },
+    { title: 'أسبوع كامل', icon: '<i class="ph ph-calendar-blank"></i>', t: 7 },
+    { title: 'مستكشف', icon: '<i class="ph ph-magnifying-glass"></i>', t: 10 },
+    { title: 'أساس متين', icon: '<i class="ph ph-buildings"></i>', t: 28 },
+    { title: 'مثابر', icon: '<i class="ph ph-lightning"></i>', t: 42 },
+    { title: 'متقدم', icon: '<i class="ph ph-lightning"></i>', t: 70 },
+    { title: 'Strategist', icon: '<i class="ph ph-trophy"></i>', t: 98 }
+  ];
+  const ag = document.getElementById('dashAchievements');
+  let badgeCount = 0;
+  achievements.forEach(a => {
+    const unlocked = totalDone >= a.t;
+    if (unlocked) badgeCount++;
+    ag.innerHTML += `
+      <div class="card" style="text-align:center;opacity:${unlocked ? 1 : .35}">
+        <div style="font-size:2rem;margin-bottom:6px">${a.icon}</div>
+        <h4 style="margin:0">${a.title}</h4>
+        ${unlocked ? '<span class="badge badge-success mt-1"><i class="ph ph-check"></i></span>' : ''}
+      </div>`;
+  });
+  document.getElementById('dBadges').textContent = badgeCount;
+});
+</script>
+</body>
+</html>

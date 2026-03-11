@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تقدّمي — Detektly Academy</title>
+<meta content="تتبع تقدمك عبر جميع المسارات التعليمية. Detektly Academy." name="description"/>
+<link href="brand/logo/fav.ico" rel="icon" type="image/x-icon"/>
+<link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="index.html">الرئيسية</a></li><li><a href="paths.html">المسارات</a></li><li><a href="exercises.html">التمارين</a></li><li><a href="progress.html">تقدّمي</a></li><li><a href="resources.html">الموارد</a></li><li><a href="faq.html">الأسئلة</a></li><li><a href="about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="paths.html"><i class="ph ph-books"></i> المسارات</a><a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="resources.html"><i class="ph ph-link"></i> الموارد</a><a href="faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+<main class="wrap page-content">
+<section class="hero">
+<div class="hero-content">
+<div class="eyebrow"><i class="ph ph-chart-bar"></i> تقدّمي</div>
+<h1>تتبع <span class="text-gradient">رحلتك التعليمية</span></h1>
+<p>شاهد تقدمك في كل مسار، إنجازاتك، وسلسلة أيام التعلم المتواصلة.</p>
+</div>
+</section>
+<!-- Overall Stats -->
+<section class="section">
+<div class="stat-grid grid-4">
+<div class="stat-card">
+<span class="stat-num" id="totalDays">0</span>
+<span class="stat-label">يوم مكتمل من أصل 98</span>
+</div>
+<div class="stat-card">
+<span class="stat-num" id="totalPercent">0%</span>
+<span class="stat-label">التقدم الإجمالي</span>
+</div>
+<div class="stat-card">
+<span class="stat-num" id="streakCount">0</span>
+<span class="stat-label">أيام تعلم متواصلة</span>
+</div>
+<div class="stat-card">
+<span class="stat-num" id="achievementCount">0</span>
+<span class="stat-label">إنجازات محققة</span>
+</div>
+</div>
+</section>
+<!-- Path Progress -->
+<section class="section">
+<h2 class="mb-3">التقدم حسب المسار</h2>
+<div class="grid-2" id="pathCards"></div>
+</section>
+<!-- Achievements -->
+<section class="section">
+<h2 class="mb-3"><i class="ph ph-trophy"></i> الإنجازات</h2>
+<div class="feature-grid" id="achievementsGrid"></div>
+</section>
+<!-- Actions -->
+<section class="section">
+<div class="card" style="padding:28px;text-align:center">
+<h3 style="margin:0 0 12px">إدارة التقدم</h3>
+<p class="muted mb-2">يتم حفظ تقدمك محليًا في المتصفح باستخدام localStorage.</p>
+<button class="btn btn-secondary" id="resetBtn">تصفير كل التقدم</button>
+</div>
+</section>
+</main>
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong></p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="js/navigation.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const paths = [
+    { id: 'foundation-28', key: 'seo-geo-foundation-28', name: '<i class="ph ph-plant"></i> المرحلة التأسيسية', total: 28, color: 'var(--accent)', link: 'seo_geo_foundation_28_day_curriculum.html' },
+    { id: 'seo-geo-42', key: 'seo_geo_curriculum_v1', name: '<i class="ph ph-magnifying-glass"></i> إتقان SEO و GEO', total: 42, color: 'var(--purple)', link: 'seo_geo_42_day_curriculum.html' },
+    { id: 'tools', key: 'svp-tools-path', name: '<i class="ph ph-wrench"></i> أدوات ومنصات البحث', total: 14, color: 'var(--success)', link: 'path-tools.html' },
+    { id: 'strategy', key: 'svp-strategy-path', name: '<i class="ph ph-target"></i> استراتيجية الظهور', total: 14, color: 'var(--warning)', link: 'path-strategy.html' }
+  ];
+
+  function getPathDone(path) {
+    try {
+      const data = JSON.parse(localStorage.getItem(path.key) || '{}');
+      if (!data.completed) return 0;
+      return Object.values(data.completed).filter(Boolean).length;
+    } catch { return 0; }
+  }
+
+  let totalDone = 0;
+  let totalAll = 0;
+
+  // Path cards
+  const pathCards = document.getElementById('pathCards');
+  paths.forEach(p => {
+    const done = getPathDone(p);
+    totalDone += done;
+    totalAll += p.total;
+    const pct = Math.round((done / p.total) * 100);
+    const card = document.createElement('a');
+    card.href = p.link;
+    card.className = 'card';
+    card.style.textDecoration = 'none';
+    card.innerHTML = `
+      <div class="flex justify-between items-center" style="margin-bottom:12px">
+        <h3 style="margin:0">${p.name}</h3>
+        <span class="badge">${pct}%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,${p.color},${p.color}88)"></div></div>
+      <div class="flex justify-between mt-1">
+        <span class="muted text-sm">${done} / ${p.total} يوم</span>
+        <span class="muted text-sm">${p.total - done} متبقي</span>
+      </div>
+    `;
+    pathCards.appendChild(card);
+  });
+
+  // Overall stats
+  const totalPct = totalAll > 0 ? Math.round((totalDone / totalAll) * 100) : 0;
+  document.getElementById('totalDays').textContent = totalDone;
+  document.getElementById('totalPercent').textContent = totalPct + '%';
+
+  // Streak
+  const streak = (() => {
+    try {
+      const ps = JSON.parse(localStorage.getItem('svp-progress') || '{}');
+      return ps.streak ? ps.streak.current || 0 : 0;
+    } catch { return 0; }
+  })();
+  document.getElementById('streakCount').textContent = streak;
+
+  // Achievements
+  const achievements = [
+    { id: 'first-step', title: 'الخطوة الأولى', desc: 'أكملت أول يوم تعليمي', icon: '<i class="ph ph-rocket-launch"></i>', threshold: 1 },
+    { id: 'week-one', title: 'أسبوع كامل', desc: 'أكملت 7 أيام', icon: '<i class="ph ph-calendar-blank"></i>', threshold: 7 },
+    { id: 'explorer', title: 'مستكشف', desc: 'أكملت 10 أيام', icon: '<i class="ph ph-magnifying-glass"></i>', threshold: 10 },
+    { id: 'foundation', title: 'أساس متين', desc: 'أكملت المرحلة التأسيسية (28 يوم)', icon: '<i class="ph ph-buildings"></i>', threshold: 28 },
+    { id: 'dedicated', title: 'مثابر', desc: 'أكملت 42 يومًا', icon: '<i class="ph ph-lightning"></i>', threshold: 42 },
+    { id: 'advanced', title: 'متقدم', desc: 'أكملت 70 يومًا', icon: '<i class="ph ph-lightning"></i>', threshold: 70 },
+    { id: 'master', title: 'Search Visibility Strategist', desc: 'أكملت كل المسارات (98 يوم)', icon: '<i class="ph ph-trophy"></i>', threshold: 98 }
+  ];
+
+  const grid = document.getElementById('achievementsGrid');
+  let unlockedCount = 0;
+  achievements.forEach(a => {
+    const unlocked = totalDone >= a.threshold;
+    if (unlocked) unlockedCount++;
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.style.opacity = unlocked ? '1' : '0.4';
+    el.style.textAlign = 'center';
+    el.innerHTML = `
+      <div style="font-size:2.5rem;margin-bottom:8px">${a.icon}</div>
+      <h4 style="margin:0 0 4px">${a.title}</h4>
+      <p class="muted text-sm">${a.desc}</p>
+      ${unlocked ? '<span class="badge badge-success mt-1">مُحقق <i class="ph ph-check"></i></span>' : `<span class="muted text-sm mt-1" style="display:block">${a.threshold - totalDone} يوم متبقي</span>`}
+    `;
+    grid.appendChild(el);
+  });
+  document.getElementById('achievementCount').textContent = unlockedCount;
+
+  // Reset
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (!confirm('سيتم حذف كل التقدم والملاحظات من جميع المسارات. هل تريد المتابعة؟')) return;
+    paths.forEach(p => localStorage.removeItem(p.key));
+    localStorage.removeItem('svp-progress');
+    location.reload();
+  });
+});
+</script>
+</body>
+</html>

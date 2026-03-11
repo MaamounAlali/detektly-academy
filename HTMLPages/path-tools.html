@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أدوات ومنصات البحث — Search Visibility Path</title>
+  <meta name="description" content="تعلّم استخدام Google Search Console وBing Webmaster Tools وأدوات البيانات المنظمة بشكل عملي.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;background:rgba(10,16,32,.82);border-left:1px solid var(--line);backdrop-filter:blur(16px);padding:20px}
+    .side-brand{padding:18px;margin-bottom:16px;background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .side-brand h1{margin:0 0 8px;font-size:1.2rem;line-height:1.35}
+    .side-brand p{margin:0;color:var(--muted);font-size:.9rem}
+    .side-section{margin-top:16px}
+    .side-title{font-size:.82rem;color:var(--muted);margin:0 0 8px}
+    .side-nav{display:flex;flex-direction:column;gap:6px}
+    .side-link{display:block;padding:10px 12px;border-radius:12px;color:var(--text);background:rgba(255,255,255,.02);text-decoration:none;font-size:.92rem}
+    .side-link:hover{background:rgba(255,255,255,.05);text-decoration:none}
+    .side-link small{display:block;color:var(--muted);font-size:.82rem}
+    .main-area{padding:24px 28px 48px}
+    .w-stat{background:rgba(255,255,255,.03);padding:12px;border-radius:14px;border:1px solid var(--line-soft)}
+    .w-stat strong{display:block;font-size:1.1rem}
+    .w-stat span{display:block;color:var(--muted);font-size:.82rem}
+    .week-card{background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:20px 0}
+    .week-header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;cursor:pointer}
+    .week-header h3{margin:0;font-size:1.2rem}
+    .week-meta{min-width:160px;text-align:left}
+    .day-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+    .day-card{background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;position:relative}
+    .day-card h4{margin:0 0 8px;font-size:1rem;padding-left:80px}
+    .day-badge{position:absolute;left:16px;top:14px;background:#0f1a38;border:1px solid var(--line);padding:5px 10px;border-radius:var(--radius-pill);font-size:.8rem;color:var(--muted)}
+    .day-card p,.day-card li{color:var(--muted);font-size:.92rem}
+    .day-card ul{margin:8px 0;padding-right:20px}
+    .day-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+    .check{display:flex;align-items:center;gap:8px;font-size:.9rem}
+    .check input{width:18px;height:18px}
+    .notes{margin-top:12px}
+    .notes input{width:100%;background:#0b1328;color:var(--text);border-radius:12px;padding:10px 12px;border:1px solid var(--line);font:inherit}
+    .mini-progress{height:8px;background:#091327;border-radius:var(--radius-pill);overflow:hidden;border:1px solid var(--line);margin-top:8px}
+    .mini-progress>div{height:100%;background:linear-gradient(90deg,var(--accent),var(--success))}
+    .hero-section{padding:22px;margin-bottom:18px;background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero-section h2{margin:0 0 10px;font-size:1.5rem}
+    .hero-section p{margin:0;color:var(--muted)}
+    .hidden{display:none !important}
+    @media(max-width:1100px){
+      .app{grid-template-columns:1fr}
+      aside{position:relative;height:auto;border-left:none;border-bottom:1px solid var(--line)}
+      .day-grid{grid-template-columns:1fr}
+    }
+  
+    .app { padding-top: 20px; }
+</style>
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="index.html">الرئيسية</a></li><li><a href="paths.html">المسارات</a></li><li><a href="exercises.html">التمارين</a></li><li><a href="progress.html">تقدّمي</a></li><li><a href="resources.html">الموارد</a></li><li><a href="faq.html">الأسئلة</a></li><li><a href="about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="paths.html"><i class="ph ph-books"></i> المسارات</a><a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="resources.html"><i class="ph ph-link"></i> الموارد</a><a href="faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+
+<div class="app">
+  <aside>
+    <div class="side-brand">
+      <h1><i class="ph ph-wrench"></i> أدوات ومنصات البحث</h1>
+      <p>14 يومًا لإتقان أدوات القياس والتشخيص العملية.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
+        <div class="w-stat"><strong id="doneCount">0</strong><span>أيام مكتملة</span></div>
+        <div class="w-stat"><strong id="remainingCount">14</strong><span>أيام متبقية</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="globalProgress" style="width:0%"></div></div>
+      <span class="muted" style="font-size:.85rem" id="progressLabel">0%</span>
+    </div>
+    <div class="side-section">
+      <div class="side-title">التنقل السريع</div>
+      <div class="side-nav" id="weekNav"></div>
+    </div>
+    <div class="side-section">
+      <div class="side-title">إجراءات</div>
+      <div class="side-nav">
+        <a href="#" class="side-link" id="expandAll">فتح كل الأسابيع</a>
+        <a href="#" class="side-link" id="collapseAll">طي كل الأسابيع</a>
+        <a href="#" class="side-link" id="resetProgress">تصفير التقدم</a>
+        <a href="index.html" class="side-link"><i class="ph ph-arrow-left"></i> العودة للرئيسية</a>
+      </div>
+    </div>
+  </aside>
+  <main class="main-area">
+    <div style="margin-bottom: 24px; display: flex; align-items: center;">
+      <a href="paths.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 500; padding: 8px 16px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); color: var(--muted); text-decoration: none; transition: all 0.3s ease;">
+        <i class="ph ph-caret-right" style="font-size: 1.1rem;"></i>
+        العودة إلى المسارات التعليمية
+      </a>
+    </div>
+
+    
+
+    <section class="hero-section">
+      <h2>إتقان أدوات البحث والقياس</h2>
+      <p>تطبيق عملي على Google Search Console، Bing Webmaster Tools، أدوات فحص البيانات المنظمة، وتقنيات التحليل والتشخيص.</p>
+      <div class="pill-row" style="margin-top:12px">
+        <span class="pill">Google Search Console</span>
+        <span class="pill">Bing Webmaster Tools</span>
+        <span class="pill">Rich Results Test</span>
+        <span class="pill">Schema Validator</span>
+      </div>
+    </section>
+    <div id="weeksContainer"></div>
+    <div style="height:36px"></div>
+  </main>
+</div>
+
+<script>
+const curriculum = [
+  {
+    week:1, title:'الأسبوع 1 — Google Search Console',
+    intro:'إتقان أهم أداة لقياس الظهور في بحث Google.',
+    days:[
+      {day:1,title:'التسجيل والتحقق من الملكية',goal:'تفهم كيفية إضافة موقع وإثبات ملكيته.',tasks:['سجّل في Search Console وأضف موقعًا (أو موقعًا تجريبيًا).','تعرّف على طرق التحقق المختلفة.'],output:'موقع مُضاف ومُتحقق منه في Search Console.'},
+      {day:2,title:'لوحة التحكم الأساسية',goal:'تتعرف على الأقسام الرئيسية وتقرأ الملخص العام.',tasks:['افتح كل قسم وسجّل ماذا يعرض.','اكتب ملخصًا من 5 نقاط عن واجهة الأداة.'],output:'خريطة لأقسام Search Console الرئيسية.'},
+      {day:3,title:'تقرير الأداء: الاستعلامات والصفحات',goal:'تفهم impressions (مرات الظهور)، clicks (النقرات)، CTR (نسبة النقر)، average position (متوسط الترتيب).',tasks:['افتح تقرير الأداء واقرأ البيانات لآخر 28 يومًا.','حلل أعلى 10 استعلامات وأعلى 10 صفحات.'],output:'ملخص تحليلي لتقرير الأداء.'},
+      {day:4,title:'تقرير الفهرسة',goal:'تفهم حالة فهرسة صفحاتك.',tasks:['افتح تقرير تغطية الفهرسة.','حدد الصفحات المفهرسة وغير المفهرسة والأسباب.'],output:'قائمة بمشاكل الفهرسة إن وجدت.'},
+      {day:5,title:'فحص رابط وSitemaps',goal:'تستخدم أداة فحص الرابط وترسل خريطة الموقع.',tasks:['افحص 5 روابط مختلفة.','أرسل خريطة الموقع (Sitemap) إن لم تكن مُرسلة.'],output:'نتائج فحص 5 صفحات + حالة Sitemap.'},
+      {day:6,title:'تقرير Core Web Vitals',goal:'تفهم مقاييس تجربة الصفحة الأساسية.',tasks:['افتح تقرير Core Web Vitals.','حدد الصفحات ذات الأداء الجيد والضعيف.'],output:'ملخص حالة CWV للموقع.'},
+      {day:7,title:'مراجعة الأسبوع الأول',goal:'تُثبّت فهمك لSearch Console.',tasks:['اكتب دليلًا مختصرًا من صفحتين: كيف تستخدم Search Console يوميًا.'],output:'دليل استخدام مختصر وعملي.'}
+    ]
+  },
+  {
+    week:2, title:'الأسبوع 2 — Bing + Structured Data + التحليل',
+    intro:'توسيع المنظور ليشمل Bing والبيانات المنظمة والمقارنة بين المنصات.',
+    days:[
+      {day:8,title:'Bing Webmaster Tools — التسجيل والاكتشاف',goal:'تسجّل في Bing Webmaster Tools وتكتشف واجهته.',tasks:['أضف موقعك في Bing Webmaster Tools.','قارن واجهة Bing مع Google Search Console.'],output:'مقارنة سريعة بين واجهتي Google وBing.'},
+      {day:9,title:'تقارير Bing: SEO وGEO',goal:'تقرأ تقارير SEO المدمجة وتقرير GEO في Bing.',tasks:['افتح تقرير SEO في Bing ولاحظ التوصيات.','اكتشف تقارير الذكاء الاصطناعي إن توفرت.'],output:'ملاحظات على تقارير Bing.'},
+      {day:10,title:'Rich Results Test',goal:'تفحص صفحات باستخدام أداة فحص النتائج المنسقة من Google.',tasks:['افحص 10 صفحات باستخدام Rich Results Test.','سجّل النتائج: ما الذي يظهر وما الذي ينقص.'],output:'جدول نتائج فحص 10 صفحات.'},
+      {day:11,title:'Schema Markup Validator',goal:'تتعلم فحص الترميز المنظم باستخدام schema.org validator.',tasks:['افحص 5 صفحات بها بيانات منظمة.','حدد الأخطاء والتحذيرات.'],output:'تقرير فحص structured data.'},
+      {day:12,title:'مقارنة بيانات Google وBing',goal:'تقارن بيانات الأداء بين المنصتين.',tasks:['خذ نفس الموقع وقارن بيانات Google مع Bing.','سجّل أوجه التشابه والاختلاف.'],output:'ورقة مقارنة بين المنصتين.'},
+      {day:13,title:'بناء تقرير تشخيصي متكامل',goal:'تبني تقريرًا يجمع بيانات من كل الأدوات.',tasks:['اكتب تقريرًا تشخيصيًا من صفحتين يغطي: الفهرسة، الأداء، البيانات المنظمة، والتوصيات.'],output:'تقرير تشخيصي متكامل.'},
+      {day:14,title:'الاختبار النهائي والمراجعة',goal:'تثبّت كل ما تعلمته في هذا المسار.',tasks:['اكتب دليلًا شخصيًا من 3 صفحات: كيف أستخدم أدوات البحث يوميًا.','حدد الأدوات التي ستستخدمها بانتظام ومتى.'],output:'دليل شخصي لأدوات البحث.'}
+    ]
+  }
+];
+
+const storageKey = 'svp-tools-path';
+let state;
+const defaultState = {completed:{},notes:{},collapsedWeeks:{}};
+
+function loadState(){
+  try{return{...defaultState,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}
+  catch(e){return structuredClone(defaultState);}
+}
+function saveState(){localStorage.setItem(storageKey,JSON.stringify(state));}
+
+function escapeHtml(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
+
+function weekCompletion(w){
+  const t=w.days.length,d=w.days.filter(x=>state.completed[x.day]).length;
+  return{done:d,total:t,pct:Math.round(d/t*100)};
+}
+function globalCompletion(){
+  const t=curriculum.reduce((a,w)=>a+w.days.length,0);
+  const d=curriculum.flatMap(w=>w.days).filter(x=>state.completed[x.day]).length;
+  return{done:d,total:t,pct:Math.round(d/t*100)};
+}
+
+function render(){
+  state=loadState();
+  const g=globalCompletion();
+  document.getElementById('doneCount').textContent=g.done;
+  document.getElementById('remainingCount').textContent=g.total-g.done;
+  document.getElementById('globalProgress').style.width=g.pct+'%';
+  document.getElementById('progressLabel').textContent=g.pct+'%';
+
+  const nav=document.getElementById('weekNav');
+  nav.innerHTML='';
+  curriculum.forEach(w=>{
+    const c=weekCompletion(w);
+    const a=document.createElement('a');
+    a.href='#week-'+w.week;a.className='side-link';
+    a.innerHTML=`<strong>${w.title}</strong><small>${c.done}/${c.total} أيام</small>`;
+    nav.appendChild(a);
+  });
+
+  const container=document.getElementById('weeksContainer');
+  container.innerHTML='';
+  curriculum.forEach(w=>{
+    const c=weekCompletion(w);
+    const collapsed=state.collapsedWeeks[w.week]??false;
+    const sec=document.createElement('section');
+    sec.className='week-card';sec.id='week-'+w.week;
+    sec.innerHTML=`
+      <div class="week-header" data-toggle="${w.week}">
+        <div><h3>${w.title}</h3><p class="muted">${w.intro}</p></div>
+        <div class="week-meta"><div class="muted">${c.done}/${c.total} مكتمل</div><div class="mini-progress"><div style="width:${c.pct}%"></div></div></div>
+      </div>
+      <div class="${collapsed?'hidden':''}" id="wc-${w.week}">
+        <div class="day-grid"></div>
+      </div>`;
+    const grid=sec.querySelector('.day-grid');
+    w.days.forEach(d=>{
+      const done=!!state.completed[d.day];
+      const art=document.createElement('article');
+      art.className='day-card';
+      art.innerHTML=`
+        <span class="day-badge">اليوم ${d.day}</span>
+        <h4>${d.title}</h4>
+        <p><strong>الهدف:</strong> ${d.goal}</p>
+        <p><strong>التمرين:</strong></p>
+        <ul>${d.tasks.map(t=>`<li>${t}</li>`).join('')}</ul>
+        <p><strong>المخرج:</strong> ${d.output}</p>
+        <div class="day-actions">
+          <label class="check"><input type="checkbox" data-day="${d.day}" ${done?'checked':''}> تم هذا اليوم</label>
+        </div>
+        <div class="notes">
+          <input type="text" placeholder="ملاحظاتك" data-note="${d.day}" value="${escapeHtml((state.notes[d.day])||'')}">
+        </div>`;
+      grid.appendChild(art);
+    });
+    container.appendChild(sec);
+  });
+  bindEvents();
+}
+
+function bindEvents(){
+  document.querySelectorAll('[data-day]').forEach(el=>{
+    if(el.type==='checkbox') el.onchange=e=>{state.completed[Number(e.target.dataset.day)]=e.target.checked;saveState();render();};
+  });
+  document.querySelectorAll('[data-note]').forEach(el=>{
+    el.oninput=e=>{state.notes[Number(e.target.dataset.note)]=e.target.value;saveState();};
+  });
+  document.querySelectorAll('[data-toggle]').forEach(el=>{
+    el.onclick=()=>{const w=Number(el.dataset.toggle);state.collapsedWeeks[w]=!state.collapsedWeeks[w];saveState();render();};
+  });
+  document.getElementById('expandAll').onclick=e=>{e.preventDefault();curriculum.forEach(w=>state.collapsedWeeks[w.week]=false);saveState();render();};
+  document.getElementById('collapseAll').onclick=e=>{e.preventDefault();curriculum.forEach(w=>state.collapsedWeeks[w.week]=true);saveState();render();};
+  document.getElementById('resetProgress').onclick=e=>{
+    e.preventDefault();
+    if(!confirm('سيتم حذف كل التقدم والملاحظات. متابعة؟'))return;
+    localStorage.removeItem(storageKey);state=structuredClone(defaultState);render();
+  };
+}
+
+render();
+</script>
+
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong> | مبنية على مراجع رسمية</p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منهج 42 يومًا لإتقان SEO و GEO</title>
+  <style>
+    body { background: var(--bg); }
+    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; margin: 0; }
+    @media(max-width:1100px){ .app{grid-template-columns:1fr} }
+    
+    aside {
+      position: sticky; top: var(--nav-h); align-self: start; 
+      height: calc(100vh - var(--nav-h)); overflow: auto; 
+      background: rgba(10, 16, 32, 0.82); border-left: 1px solid var(--line); 
+      backdrop-filter: blur(16px); padding: 24px;
+    }
+    @media(max-width:1100px){
+      aside { position: relative; top: 0; height: auto; border-left: none; border-bottom: 1px solid var(--line); }
+    }
+
+    .side-brand {
+      padding: 18px; margin-bottom: 20px; 
+      background: linear-gradient(180deg, rgba(17, 24, 51, 0.96), rgba(12, 19, 39, 0.96)); 
+      border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .side-brand h1 { margin: 0 0 8px; font-size: 1.15rem; line-height: 1.35; color: var(--text); }
+    .side-brand p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+    
+    .w-stat { background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 14px; border: 1px solid var(--line-soft); }
+    .w-stat strong { display: block; font-size: 1.1rem; color: var(--accent); }
+    .w-stat span { display: block; color: var(--muted); font-size: 0.8rem; }
+    
+    .side-section { margin-top: 24px; }
+    .side-title { font-size: 0.78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 12px; }
+    
+    .side-nav { display: flex; flex-direction: column; gap: 6px; }
+    .side-link {
+      display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; 
+      color: var(--text); background: rgba(255, 255, 255, 0.02); text-decoration: none; 
+      font-size: 0.9rem; border: 1px solid transparent; transition: var(--transition);
+    }
+    .side-link:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--line-soft); text-decoration: none; }
+    .side-link label { cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .side-link small { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+    
+    .main-area { padding: 32px 40px 80px; }
+    @media(max-width:768px){ .main-area { padding: 24px 20px 60px; } }
+
+    .week-card {
+      background: linear-gradient(180deg, rgba(17, 24, 51, 0.96), rgba(12, 19, 39, 0.96)); 
+      border: 1px solid var(--line); border-radius: var(--radius-lg); 
+      box-shadow: var(--shadow); padding: 24px; margin: 32px 0;
+    }
+    .week-header { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; cursor: pointer; }
+    .week-header h3 { margin: 0; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+    .week-meta { min-width: 150px; text-align: left; }
+    
+    .day-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    @media(max-width:900px){ .day-grid { grid-template-columns: 1fr; } }
+    
+    .day-card {
+      background: rgba(255, 255, 255, 0.02); border: 1px solid var(--line-soft); 
+      border-radius: var(--radius); padding: 20px; position: relative; transition: var(--transition);
+    }
+    .day-card:hover { border-color: var(--line); background: rgba(255, 255, 255, 0.03); }
+    .day-card h4 { margin: 0 0 12px; font-size: 1.05rem; padding-left: 80px; }
+    .day-badge {
+      position: absolute; left: 20px; top: 18px; background: var(--bg-soft); 
+      border: 1px solid var(--line); padding: 4px 10px; border-radius: var(--radius-pill); 
+      font-size: 0.75rem; color: var(--muted);
+    }
+    
+    .day-card p, .day-card li { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+    .day-card ul { margin: 12px 0; padding-right: 20px; }
+    
+    .day-actions { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
+    .check { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; cursor: pointer; color: var(--muted); }
+    .check input { width: 18px; height: 18px; cursor: pointer; }
+    
+    .notes { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .notes input, .notes textarea {
+      width: 100%; background: rgba(0,0,0,0.2); color: var(--text); 
+      border-radius: 12px; padding: 12px; border: 1px solid var(--line-soft); font: inherit; transition: var(--transition);
+    }
+    .notes input:focus, .notes textarea:focus { border-color: var(--accent); outline: none; background: rgba(0,0,0,0.3); }
+    .notes textarea { min-height: 80px; resize: vertical; }
+
+    .hero-section {
+      padding: 32px; margin-bottom: 32px; 
+      background: linear-gradient(135deg, rgba(14, 23, 45, 0.98), rgba(20, 31, 58, 0.96)); 
+      border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+    }
+    .hero-section h2 { margin: 0 0 12px; font-size: 1.6rem; color: var(--text); }
+    .hero-section p { margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
+
+    .mini-progress { height: 6px; background: rgba(0,0,0,0.3); border-radius: 10px; overflow: hidden; margin-top: 10px; }
+    .mini-progress > div { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width 0.5s ease; }
+
+    .resource-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .resource-list a {
+      display: flex; align-items: center; gap: 10px; padding: 14px 18px; 
+      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); 
+      border-radius: 14px; transition: var(--transition); font-size: 0.9rem;
+    }
+    .resource-list a:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--accent); text-decoration: none; }
+
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; padding: 16px; 
+      background: rgba(255, 255, 255, 0.02); border-radius: 16px; border: 1px solid var(--line-soft);
+    }
+    .toolbar input { flex: 2; min-width: 200px; background: rgba(0,0,0,0.2); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px 16px; color: var(--text); }
+    .toolbar select { flex: 1; background: rgba(0,0,0,0.2); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px; color: var(--text); }
+    .toolbar button { padding: 10px 20px; border-radius: 12px; border: 1px solid var(--line-soft); background: var(--panel); color: var(--text); cursor: pointer; transition: var(--transition); font-weight: 600; }
+    .toolbar button:hover { background: var(--line); }
+
+    .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+    @media(max-width:800px){ .overview-grid { grid-template-columns: 1fr; } }
+    
+    .quote { border-right: 3px solid var(--accent); padding: 16px 20px; margin: 16px 0; color: var(--muted); background: rgba(255, 255, 255, .02); border-radius: 0 12px 12px 0; }
+    .hidden { display: none !important; }
+</style>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="index.html">الرئيسية</a></li><li><a href="paths.html">المسارات</a></li><li><a href="exercises.html">التمارين</a></li><li><a href="progress.html">تقدّمي</a></li><li><a href="resources.html">الموارد</a></li><li><a href="faq.html">الأسئلة</a></li><li><a href="about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="paths.html"><i class="ph ph-books"></i> المسارات</a><a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="resources.html"><i class="ph ph-link"></i> الموارد</a><a href="faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+
+<div class="app">
+  <aside>
+    <div class="side-brand">
+      <h1>منهج 42 يومًا لإتقان SEO و GEO</h1>
+      <p>خطة يومية عملية لفهم الظهور في محركات البحث ومحركات الإجابة التوليدية خارج التطبيق.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
+        <div class="w-stat"><strong id="doneCount">0</strong><span>أيام مكتملة</span></div>
+        <div class="w-stat"><strong id="remainingCount">42</strong><span>أيام متبقية</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="globalProgress" style="width:0%"></div></div>
+      <span class="muted" id="progressLabel" style="font-size:0.85rem">0%</span>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">إعدادات العرض</div>
+      <div class="side-nav">
+        <div class="side-link"><label><input type="checkbox" id="compactMode"> عرض مضغوط</label></div>
+        <div class="side-link"><label><input type="checkbox" id="collapseCompleted"> طي الأيام المكتملة</label></div>
+        <div class="side-link"><label><input type="checkbox" id="autoExpandCurrent"> فتح الأسبوع الجاري تلقائيًا</label></div>
+      </div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">التنقل السريع</div>
+      <div class="side-nav" id="weekNav"></div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">إجراءات</div>
+      <div class="side-nav">
+        <a href="#" class="side-link" id="expandAll">فتح كل الأسابيع</a>
+        <a href="#" class="side-link" id="collapseAll">طي كل الأسابيع</a>
+        <a href="#" class="side-link" id="resetProgress">تصفير التقدم والملاحظات</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <div style="margin-bottom: 24px; display: flex; align-items: center;">
+      <a href="paths.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 500; padding: 8px 16px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); color: var(--muted); text-decoration: none; transition: all 0.3s ease;">
+        <i class="ph ph-caret-right" style="font-size: 1.1rem;"></i>
+        العودة إلى المسارات التعليمية
+      </a>
+    </div>
+
+    
+
+    <section class="hero-section">
+      <h2>المنهج الصحيح</h2>
+      <p>الترتيب هنا متعمد: فهم البحث، ثم نية البحث وبنية المعلومات، ثم جودة المحتوى والثقة، ثم البيانات المنظمة والكيانات، ثم القياس والتشخيص، ثم GEO (تحسين الظهور في محركات الإجابة التوليدية).</p>
+      <div class="pill-row" style="margin-top:16px">
+        <span class="pill">SEO (تحسين الظهور في محركات البحث)</span>
+        <span class="pill">GEO (تحسين الظهور في محركات الإجابة التوليدية)</span>
+        <span class="pill">Search intent (نية الباحث)</span>
+        <span class="pill">Structured data (البيانات المنظمة)</span>
+        <span class="pill">Entity clarity (وضوح الكيان)</span>
+        <span class="pill">Search Console (أداة مراقبة أداء البحث)</span>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <input type="text" id="searchInput" placeholder="ابحث عن يوم أو موضوع أو كلمة مثل: structured data أو نية البحث" />
+      <select id="statusFilter">
+        <option value="all">كل الأيام</option>
+        <option value="open">غير المكتملة</option>
+        <option value="done">المكتملة</option>
+      </select>
+      <select id="weekFilter">
+        <option value="all">كل الأسابيع</option>
+      </select>
+      <button id="printBtn">طباعة</button>
+      <button class="btn-secondary" id="exportNotes">تصدير الملاحظات</button>
+    </section>
+
+    <section class="overview-grid">
+      <div class="card">
+        <h3 style="margin-top:0; margin-bottom:10px">قواعد التنفيذ</h3>
+        <ul>
+          <li>60 إلى 90 دقيقة يوميًا فقط.</li>
+          <li>قراءة ثم تلخيص من الذاكرة ثم تحليل مواقع حقيقية.</li>
+          <li>ممنوع القفز إلى أدوات أو تكتيكات قبل فهم الأساس.</li>
+          <li>استخدم المراجع الرسمية فقط في هذه المرحلة.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0; margin-bottom:10px">إدارة البيانات والتخزين المحلي</h3>
+        <ul>
+          <li>حالة إكمال كل يوم.</li>
+          <li>ملاحظاتك وملخصاتك اليومية.</li>
+          <li>إعدادات العرض والطي.</li>
+          <li>آخر يوم عملت عليه.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-top:0; margin-bottom:10px">المراجع الأساسية</h3>
+      <div class="resource-list" id="resourceList"></div>
+    </section>
+
+    <section class="card quote">
+      النجاح هنا ليس أن تعرف المصطلحات. النجاح أن تنظر إلى صفحة أو موقع وتقول بدقة: هذه ليست مشكلة SEO عامة، بل مشكلة فهرسة، أو عدم تطابق نية، أو ضعف وضوح الكيان، أو صفحة ضعيفة كمصدر قابل للإسناد.
+    </section>
+
+    <div id="weeksContainer"></div>
+    <div class="footer-space"></div>
+  </main>
+</div>
+
+<script>
+const resources = [
+  {title:'Google Search Essentials', url:'https://developers.google.com/search/docs/essentials'},
+  {title:'Google SEO Starter Guide', url:'https://developers.google.com/search/docs/fundamentals/seo-starter-guide'},
+  {title:'Google How Search Works', url:'https://developers.google.com/search/docs/fundamentals/how-search-works'},
+  {title:'Google Creating helpful, reliable, people-first content', url:'https://developers.google.com/search/docs/fundamentals/creating-helpful-content'},
+  {title:'Google Spam Policies', url:'https://developers.google.com/search/docs/essentials/spam-policies'},
+  {title:'Google Intro to structured data', url:'https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data'},
+  {title:'Google Search Console getting started', url:'https://developers.google.com/search/docs/monitor-debug/search-console-start'},
+  {title:'Google AI features and your website', url:'https://developers.google.com/search/docs/appearance/ai-features'},
+  {title:'Bing Webmaster Guidelines', url:'https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a'},
+  {title:'GEO paper (arXiv)', url:'https://arxiv.org/abs/2311.09735'},
+  {title:'schema.org Documentation', url:'https://schema.org/docs/documents.html'}
+];
+
+const weeks = [
+  {
+    id:1,
+    title:'الأسبوع 1: كيف يعمل البحث أصلًا',
+    summary:'فهم الزحف، الفهرسة، العرض، والأهلية التقنية الأساسية.',
+    days:[
+      {n:1, title:'كيف تنتقل الصفحة من موجودة على الويب إلى قابلة للظهور', read:['Search Essentials: النظرة العامة','How Google Search Works: النظرة العامة'], task:'اكتب شرحًا من صفحة واحدة بعنوان: كيف تنتقل الصفحة من موجودة على الويب إلى قابلة للظهور في البحث.', exercise:'اختر 5 صفحات من مواقع مختلفة، وحدد هل هي قابلة للزحف والفهرسة والظهور.'},
+      {n:2, title:'الحد الأدنى التقني لأهلية الصفحة', read:['Search Essentials: technical requirements'], task:'اكتب قائمة تحقق من 10 نقاط بعنوان: الحد الأدنى التقني لأهلية الصفحة في البحث.', exercise:'افحص 5 صفحات وحدد: HTTP 200، قابلية الفهرسة، وإمكانية الحجب عن الزحف أو الفهرسة.'},
+      {n:3, title:'قابلية الاكتشاف والفهم والنقر', read:['SEO Starter Guide: how search engines and people understand your site'], task:'اكتب الفرق بين discoverability (قابلية الاكتشاف) وunderstandability (قابلية الفهم) وclickability (قابلية النقر).', exercise:'حلل 3 صفحات نتائج بحث حقيقية واسأل: لماذا ظهرت؟ ولماذا قد ينقر المستخدم أو لا ينقر؟'},
+      {n:4, title:'مراحل البحث الثلاث', read:['How Google Search Works: crawling, indexing, serving/ranking'], task:'ارسم مخططًا بسيطًا يشرح الزحف، الفهرسة، والعرض/الترتيب.', exercise:'خذ موقعًا تعرفه ودوّن 5 أسباب محتملة تمنع صفحة منه من المرور من مرحلة إلى أخرى.'},
+      {n:5, title:'مقارنة Google وBing', read:['Bing Webmaster Guidelines: القسم العام'], task:'اكتب مقارنة قصيرة بين Google وBing: أين يتشابهان وأين تختلف اللغة أو التركيز؟', exercise:'اختر صفحة واحدة وقيّمها من منظور Google ثم من منظور Bing.'},
+      {n:6, title:'مراجعة عملية للأسبوع الأول', read:['مراجعة كل ما سبق'], task:'اكتب ملخص الأسبوع 1 في صفحتين: كيف يعمل البحث؟ ما شروط الأهلية؟ أين يفشل أغلب المبتدئين؟', exercise:'حلل موقعًا كاملًا تحليلًا أوليًا وحدد هل مشكلته زحف أو فهرسة أو بنية أو محتوى.'},
+      {n:7, title:'اختبار ذاتي', read:['بدون قراءة جديدة'], task:'اشرح من ذاكرتك الفرق بين crawl (زحف) وindex (فهرسة) وrank (ترتيب).', exercise:'أجب شفهيًا أو كتابيًا: لماذا ليست كل صفحة مفهرسة بالضرورة؟ ولماذا ليست كل صفحة مفهرسة ظاهرة؟'}
+    ]
+  },
+  {
+    id:2,
+    title:'الأسبوع 2: نية البحث وبنية المعلومات',
+    summary:'الظهور لا يبدأ من الكلمات المفتاحية فقط، بل من مطابقة النية ببنية الصفحة.',
+    days:[
+      {n:8, title:'هندسة بنية المعلومات', read:['SEO Starter Guide: organizing your site hierarchy','navigation'], task:'اكتب تعريفًا عمليًا لـ information architecture (هندسة بنية المعلومات).', exercise:'افتح موقعًا كبيرًا وارسم هيكله: الرئيسية، الفئات، التفاصيل، الصفحات المرجعية.'},
+      {n:9, title:'العناوين والمقتطفات', read:['SEO Starter Guide: title links','snippets'], task:'اكتب 10 قواعد عملية لعنوان صفحة جيد.', exercise:'خذ 10 صفحات وأعد كتابة عناوينها بشكل أقوى دون تضليل.'},
+      {n:10, title:'الروابط الداخلية ونص الرابط', read:['SEO Starter Guide: links','descriptive anchor text'], task:'اشرح لماذا الروابط الداخلية ليست تفصيلًا صغيرًا بل جزء من فهم الموقع.', exercise:'حلل 20 رابطًا داخليًا داخل موقع واحد وحدد القوي والضعيف منها.'},
+      {n:11, title:'تعريف نية البحث عمليًا', read:['SEO Starter Guide + Search Essentials حول الكلمات التي يستخدمها الناس'], task:'اكتب تعريفًا عمليًا لـ search intent (نية الباحث).', exercise:'اجمع 25 استعلامًا في مجال واحد وصنفها إلى معلوماتي، تجاري، وصول لجهة محددة، تنفيذي/شرائي.'},
+      {n:12, title:'ربط الاستعلام بنوع الصفحة', read:['مراجعة اليوم 11'], task:'اربط كل استعلام بنوع الصفحة المناسب: مقال، صفحة هبوط، صفحة منتج، مقارنة، فئة.', exercise:'حدد 10 حالات عدم تطابق بين نية البحث ونوع الصفحة في مواقع حقيقية.'},
+      {n:13, title:'مقارنة 3 مواقع من نفس المجال', read:['بدون قراءة جديدة'], task:'قارن 3 مواقع من نفس المجال وحدد من يملك أفضل هيكل وأفضل مطابقة بين الاستعلام والصفحة.', exercise:'استخرج أمثلة واضحة على صفحات ناجحة وأخرى مضطربة.'},
+      {n:14, title:'مراجعة الأسبوع الثاني', read:['مراجعة كل ما سبق'], task:'اكتب ورقة بعنوان: الظهور لا يبدأ من الكلمات المفتاحية، بل من مطابقة النية ببنية الصفحة.', exercise:'حوّل ملاحظات الأسبوع إلى framework (إطار عمل) قصير من 5 نقاط.'}
+    ]
+  },
+  {
+    id:3,
+    title:'الأسبوع 3: جودة المحتوى والثقة',
+    summary:'تمييز المحتوى الذي يستحق الظهور عن المحتوى المصمم فقط لملاحقة الترتيب.',
+    days:[
+      {n:15, title:'ما هو المحتوى المفيد والموثوق', read:['Creating helpful, reliable, people-first content'], task:'استخرج 10 أسئلة تستخدمها لتقييم أي صفحة محتوى.', exercise:'طبّق هذه الأسئلة على 3 صفحات فعلية.'},
+      {n:16, title:'قائمة تحقق للجودة التحريرية', read:['نفس المصدر مع التركيز على self-assess questions'], task:'أنشئ checklist (قائمة تحقق) للجودة التحريرية.', exercise:'قيّم 5 مقالات فعلية بهذه القائمة.'},
+      {n:17, title:'سياسات المحتوى المزعج والمخادع', read:['Spam policies'], task:'اكتب الفروق بين low-value content (محتوى منخفض القيمة) وscaled content abuse (إساءة إنتاج المحتوى على نطاق واسع) وdeceptive behavior (سلوك خداعي).', exercise:'التقط 5 أمثلة من الويب وصنفها.'},
+      {n:18, title:'المحتوى المولد بالذكاء الاصطناعي: متى يقبل ومتى يرفض', read:['إرشادات المحتوى المولد بالذكاء الاصطناعي ضمن مرجع جوجل'], task:'اكتب صفحة بعنوان: متى يكون AI writing (الكتابة بالذكاء الاصطناعي) مقبولًا ومتى يصبح مشكلة؟', exercise:'خذ 3 نصوص مولدة وقيّم الأصالة والقيمة والخبرة فيها.'},
+      {n:19, title:'تحليل 10 صفحات من نفس المجال', read:['بدون قراءة جديدة'], task:'حلل 10 صفحات من نفس المجال وحدد أيها ينقل خبرة وأيها يعيد تدوير كلام عام.', exercise:'استخرج 3 مؤشرات واضحة على الخبرة الحقيقية.'},
+      {n:20, title:'بناء معيار تقييم من 100 نقطة', read:['مراجعة الأسبوع'], task:'اكتب rubric (معيار تقييم) من 100 نقطة لأي صفحة محتوى موزعًا على الوضوح، الأصالة، الإشباع، الثقة، البنية، وقابلية الاقتباس.', exercise:'قيّم صفحتين وفق هذا المعيار وقارن النتيجة.'},
+      {n:21, title:'مراجعة الأسبوع الثالث', read:['مراجعة كل ما سبق'], task:'اكتب وثيقة قصيرة بعنوان: كيف أفرّق بين المحتوى المصمم للظهور والمحتوى الذي يستحق الظهور.', exercise:'أعد صياغة 5 مبادئ ستعتمدها دائمًا في تقييم المحتوى.'}
+    ]
+  },
+  {
+    id:4,
+    title:'الأسبوع 4: البيانات المنظمة والكيانات',
+    summary:'فهم الصفحة ككيان ومعنى منظم، لا كنص فقط.',
+    days:[
+      {n:22, title:'مقدمة البيانات المنظمة', read:['Intro to structured data'], task:'اكتب تعريفًا واضحًا لـ structured data (البيانات المنظمة) بلغة بسيطة.', exercise:'اشرح لشخص آخر كيف تساعد البيانات المنظمة محركات البحث على الفهم.'},
+      {n:23, title:'قواعد استخدام البيانات المنظمة', read:['Structured data guidelines'], task:'اكتب 8 قواعد تمنع misuse (الاستخدام الخاطئ) للبيانات المنظمة.', exercise:'حلل أمثلة على ترميز منظم يبدو سليمًا وآخر يبدو مضللًا.'},
+      {n:24, title:'تحليل الكيان الرئيسي للصفحة', read:['مراجعة structured data'], task:'حلل 10 صفحات وحدد ما الكيان الرئيسي فيها: مؤسسة، منتج، مقال، FAQ (أسئلة شائعة)، أو غير ذلك.', exercise:'حدد نوع البيانات المنظمة الأنسب لكل صفحة.'},
+      {n:25, title:'قراءة schema.org الأساسية', read:['schema.org: Organization, Article, Product, FAQPage, BreadcrumbList'], task:'اكتب ملاحظات منظمة عن الأنواع الخمسة السابقة.', exercise:'حوّل هذه الملاحظات إلى جدول مقارنة بسيط.'},
+      {n:26, title:'ما الخصائص الناقصة في 5 صفحات فعلية', read:['مراجعة الأيام السابقة'], task:'خذ 5 صفحات فعلية وحدد النوع والخصائص الأساسية الناقصة وما الذي سيصبح أوضح آليًا لو وُصفت أفضل.', exercise:'اكتب توصية قصيرة لكل صفحة.'},
+      {n:27, title:'الفرق بين الصفحة المفهومة بشريًا وآليًا', read:['بدون قراءة جديدة'], task:'اكتب ورقة قصيرة بعنوان: الفرق بين الصفحة المفهومة بشريًا والصفحة المفهومة بشريًا وآليًا.', exercise:'أعط مثالًا واحدًا قويًا يوضح الفرق.'},
+      {n:28, title:'مراجعة الأسبوع الرابع', read:['مراجعة كل ما سبق'], task:'أنشئ ملفًا شخصيًا من صفحة واحدة لكل نوع صفحة: article page (صفحة مقال)، product page (صفحة منتج)، category page (صفحة فئة)، organization page (صفحة مؤسسة).', exercise:'دوّن ما الذي يجعل كل نوع أوضح لمحركات البحث والأنظمة التوليدية.'}
+    ]
+  },
+  {
+    id:5,
+    title:'الأسبوع 5: القياس والتشخيص',
+    summary:'الانتقال من الانطباعات العامة إلى تشخيص يعتمد على إشارات قابلة للرصد.',
+    days:[
+      {n:29, title:'ماذا تقيس Search Console', read:['Get started with Search Console'], task:'اكتب خريطة لما تقيسه Search Console (أداة مراقبة أداء البحث).', exercise:'سجّل ما الذي تراه الأداة وما الذي لا تراه.'},
+      {n:30, title:'تعريفات المقاييس الأساسية', read:['مراجعة Search Console'], task:'اكتب تعريفات عملية لـ impressions (مرات الظهور)، clicks (النقرات)، CTR (نسبة النقر إلى الظهور)، average position (متوسط الترتيب)، indexing status (حالة الفهرسة).', exercise:'أعط مثالًا لكل مقياس يوضح كيف قد يُساء تفسيره.'},
+      {n:31, title:'هل المشكلة ظهور أم نقر أم تطابق أم صفحة؟', read:['بدون قراءة جديدة'], task:'خذ بيانات حقيقية من أي موقع لديك أو أمثلة عامة، واسأل: هل المشكلة ضعف ظهور أم ضعف نقر أم ضعف تطابق أم ضعف صفحة؟', exercise:'اكتب حكمًا تشخيصيًا واحدًا فقط لكل مثال.'},
+      {n:32, title:'بناء ورقة تشخيص من صفحة واحدة', read:['مراجعة الأسبوع'], task:'ابنِ diagnostic sheet (ورقة تشخيص) من صفحة واحدة بعنوان: كيف أشخّص سبب ضعف الظهور.', exercise:'قسّمها إلى أهلية تقنية، فهرسة، مطابقة نية، جودة محتوى، روابط داخلية، وضوح الكيان.'},
+      {n:33, title:'تحليل 3 صفحات ضعيفة الأداء', read:['بدون قراءة جديدة'], task:'حلل 3 صفحات ضعيفة الأداء وحدد سببًا أساسيًا واحدًا فقط لكل صفحة.', exercise:'امنع نفسك من كتابة 5 أسباب. اختر السبب الأرجح فقط.'},
+      {n:34, title:'ما الذي يمكن قياسه فعلًا وما الذي يبقى استدلالًا', read:['مراجعة Search Console + التفكير النقدي'], task:'اكتب وثيقة بعنوان: ما الذي يمكن قياسه فعلًا، وما الذي يبقى استدلالًا؟', exercise:'فرّق بين observed data (بيانات ملحوظة) وcausality (علاقة سببية مؤكدة).' },
+      {n:35, title:'مراجعة الأسبوع الخامس', read:['مراجعة كل ما سبق'], task:'أنشئ ملف تشخيص من صفحتين لموقع واحد: ماذا يظهر؟ ماذا لا يظهر؟ لماذا؟ وما الأولوية الأولى للإصلاح؟', exercise:'لخّص النتيجة في 5 جمل فقط.'}
+    ]
+  },
+  {
+    id:6,
+    title:'الأسبوع 6: GEO والظهور في الإجابات التوليدية',
+    summary:'بناء فهم جاد للظهور في أنظمة الإجابة دون الوقوع في الهوس التسويقي.',
+    days:[
+      {n:36, title:'ما الذي تقوله Google رسميًا عن AI features', read:['AI features and your website'], task:'اكتب ملخصًا دقيقًا: ما الذي تقوله Google رسميًا عن الظهور في ميزات الذكاء الاصطناعي؟', exercise:'استخرج ما الذي بقي ثابتًا من SEO وما الذي تغير في طريقة العرض.'},
+      {n:37, title:'قراءة ورقة GEO', read:['GEO paper'], task:'اكتب 10 نقاط: ماذا تضيف ورقة GEO وما الذي لا تثبته؟', exercise:'افصل بين ما هو إطار بحثي وما هو ادعاء تسويقي.'},
+      {n:38, title:'مقارنة SEO وGEO', read:['مراجعة اليوم 36 و37'], task:'اكتب مقارنة بين SEO وGEO: ما المشترك، ما المختلف، وما الذي ما زال غير مستقر؟', exercise:'قدّم 5 جمل تمنع الخلط بين المجالين.'},
+      {n:39, title:'تحليل 10 صفحات من منظور قابلية الإسناد', read:['بدون قراءة جديدة'], task:'قيّم 10 صفحات قوية من منظور sourceability (قابلية الإسناد كمصدر) وsummarizability (قابلية التلخيص) وquotation readiness (قابلية الاقتباس) وentity clarity (وضوح الكيان) وanswer usefulness (فائدة الصفحة داخل إجابة).', exercise:'رتّب الصفحات من الأقوى إلى الأضعف كمصدر.'},
+      {n:40, title:'كيف أجعل الصفحة صالحة كمصدر داخل إجابة ذكية', read:['مراجعة GEO + Google AI features'], task:'اكتب ورقة بعنوان: كيف أجعل الصفحة صالحة لأن تُستخدم كمصدر داخل إجابة ذكية.', exercise:'استخرج 7 خصائص عملية للصفحة القابلة للإسناد.'},
+      {n:41, title:'مقارنة 3 مواقع من مجال واحد من منظور SEO وGEO', read:['بدون قراءة جديدة'], task:'حلل 3 مواقع في مجال واحد وحدد: أيها أقرب للظهور التقليدي وأيها أقرب للذكر أو الإسناد داخل إجابات توليدية؟ ولماذا؟', exercise:'اكتب حكمًا قصيرًا لكل موقع.'},
+      {n:42, title:'الدراسة النهائية', read:['مراجعة شاملة'], task:'اكتب دراسة من 4 صفحات بعنوان: Framework (إطار عمل) لتقييم الظهور الرقمي عبر محركات البحث ومحركات الإجابة التوليدية.', exercise:'اجعلها مبنية على 6 محاور فقط: الأهلية التقنية، الجاهزية للزحف والفهرسة، ملاءمة الاستعلام للصفحة، الثقة والفائدة، الكيان والمعنى المنظم، القياس وانعكاسات الظهور في ميزات الذكاء الاصطناعي.'}
+    ]
+  }
+];
+
+const storageKey = 'seo_geo_curriculum_v1';
+const defaultState = {
+  completed: {},
+  notes: {},
+  settings: {
+    compactMode: false,
+    collapseCompleted: false,
+    autoExpandCurrent: true
+  },
+  lastActiveDay: 1
+};
+
+function loadState(){
+  try {
+    return {...defaultState, ...JSON.parse(localStorage.getItem(storageKey) || '{}'), settings: {...defaultState.settings, ...(JSON.parse(localStorage.getItem(storageKey) || '{}').settings || {})}};
+  } catch(e){
+    return structuredClone(defaultState);
+  }
+}
+let state = loadState();
+
+function saveState(){
+  localStorage.setItem(storageKey, JSON.stringify(state));
+  updateStats();
+}
+
+function dayId(n){ return `day-${n}`; }
+
+function renderResources(){
+  const el = document.getElementById('resourceList');
+  el.innerHTML = resources.map(r => `<a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.title}</a>`).join('');
+}
+
+function renderNav(){
+  const weekNav = document.getElementById('weekNav');
+  const weekFilter = document.getElementById('weekFilter');
+  weekNav.innerHTML = '';
+  weekFilter.innerHTML = '<option value="all">كل الأسابيع</option>';
+  weeks.forEach(week => {
+    const a = document.createElement('a');
+    a.href = `#week-${week.id}`;
+    a.className = 'side-link';
+    a.innerHTML = `${week.title}<small>${week.summary}</small>`;
+    weekNav.appendChild(a);
+
+    const opt = document.createElement('option');
+    opt.value = String(week.id);
+    opt.textContent = week.title;
+    weekFilter.appendChild(opt);
+  });
+}
+
+function weekCompletion(week){
+  const total = week.days.length;
+  const done = week.days.filter(d => state.completed[dayId(d.n)]).length;
+  return {done,total,percent: Math.round((done/total)*100)};
+}
+
+function renderWeeks(){
+  const container = document.getElementById('weeksContainer');
+  container.innerHTML = '';
+  weeks.forEach(week => {
+    const wc = weekCompletion(week);
+    const section = document.createElement('section');
+    section.className = 'week-card';
+    section.id = `week-${week.id}`;
+    section.dataset.week = String(week.id);
+    section.innerHTML = `
+      <div class="week-header" data-toggle-week="${week.id}">
+        <div>
+          <h3>${week.title}</h3>
+          <p>${week.summary}</p>
+        </div>
+        <div class="week-meta">
+          <div class="muted">${wc.done} / ${wc.total} أيام مكتملة</div>
+          <div class="mini-progress"><div style="width:${wc.percent}%"></div></div>
+        </div>
+      </div>
+      <div class="week-content">
+        <div class="day-grid">
+          ${week.days.map(day => renderDay(day, week.id)).join('')}
+        </div>
+      </div>
+    `;
+    container.appendChild(section);
+  });
+
+  document.querySelectorAll('[data-toggle-week]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.parentElement.querySelector('.week-content');
+      content.classList.toggle('hidden');
+    });
+  });
+
+  document.querySelectorAll('.done-toggle').forEach(chk => {
+    chk.addEventListener('change', e => {
+      const id = e.target.dataset.day;
+      state.completed[id] = e.target.checked;
+      state.lastActiveDay = Number(id.replace('day-',''));
+      saveState();
+      applyFilters();
+    });
+  });
+
+  document.querySelectorAll('.day-note').forEach(area => {
+    area.addEventListener('input', e => {
+      state.notes[e.target.dataset.day] = e.target.value;
+      state.lastActiveDay = Number(e.target.dataset.day.replace('day-',''));
+      saveState();
+    });
+  });
+
+  applyCompactMode();
+  applyAutoExpand();
+}
+
+function renderDay(day, weekId){
+  const id = dayId(day.n);
+  const done = !!state.completed[id];
+  const note = state.notes[id] || '';
+  return `
+    <article class="day-card ${done ? 'is-done' : ''}" data-day="${day.n}" data-week="${weekId}" data-search="${(day.title + ' ' + day.read.join(' ') + ' ' + day.task + ' ' + day.exercise).toLowerCase()}">
+      <div class="day-badge">اليوم ${day.n}</div>
+      <h4>${day.title}</h4>
+      <div class="muted"><strong>القراءة:</strong> ${day.read.join(' — ')}</div>
+      <ul>
+        <li><strong>المطلوب:</strong> ${day.task}</li>
+        <li><strong>التمرين:</strong> ${day.exercise}</li>
+      </ul>
+      <div class="day-actions">
+        <label class="check"><input class="done-toggle" type="checkbox" data-day="${id}" ${done ? 'checked' : ''}> تعليم اليوم كمكتمل</label>
+        <button type="button" class="btn" style="background:var(--line); padding:6px 14px; font-size:0.8rem; border-radius:10px" onclick="state.lastActiveDay=${day.n}; saveState();">نشط الآن</button>
+      </div>
+      <div class="notes">
+        <input class="day-note" data-day="${id}" type="text" placeholder="الخلاصة اليومية أو المخرج النهائي" value="${escapeHtml(note)}">
+      </div>
+    </article>
+  `;
+}
+
+function escapeHtml(text){
+  return text.replace(/[&<>'"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
+}
+
+function updateStats(){
+  const done = Object.values(state.completed).filter(Boolean).length;
+  const total = 42;
+  const remaining = total - done;
+  const percent = Math.round((done/total)*100);
+  document.getElementById('doneCount').textContent = done;
+  document.getElementById('remainingCount').textContent = remaining;
+  document.getElementById('globalProgress').style.width = percent + '%';
+  document.getElementById('progressLabel').textContent = percent + '%';
+}
+
+function applyFilters(){
+  const text = document.getElementById('searchInput').value.trim().toLowerCase();
+  const status = document.getElementById('statusFilter').value;
+  const week = document.getElementById('weekFilter').value;
+  document.querySelectorAll('.day-card').forEach(card => {
+    const done = card.querySelector('.done-toggle').checked;
+    const matchText = !text || card.dataset.search.includes(text);
+    const matchStatus = status === 'all' || (status === 'done' && done) || (status === 'open' && !done);
+    const matchWeek = week === 'all' || card.dataset.week === week;
+    const hideCompleted = state.settings.collapseCompleted && done;
+    card.classList.toggle('hidden', !(matchText && matchStatus && matchWeek) || hideCompleted);
+  });
+  document.querySelectorAll('.week-card').forEach(weekCard => {
+    const visibleDays = weekCard.querySelectorAll('.day-card:not(.hidden)').length;
+    weekCard.classList.toggle('hidden', visibleDays === 0 && week !== 'all' ? weekCard.dataset.week !== week : visibleDays === 0 && !!text);
+  });
+}
+
+function applyCompactMode(){
+  document.body.classList.toggle('compact', state.settings.compactMode);
+  document.querySelectorAll('.day-card p, .day-card ul').forEach(el => {
+    el.style.display = state.settings.compactMode ? 'none' : '';
+  });
+}
+
+function applyAutoExpand(){
+  if(!state.settings.autoExpandCurrent) return;
+  const currentDay = Math.min(Math.max(state.lastActiveDay || 1, 1), 42);
+  let currentWeekId = 1;
+  for(const week of weeks){
+    if(week.days.some(d => d.n === currentDay)) currentWeekId = week.id;
+  }
+  document.querySelectorAll('.week-content').forEach(el => el.classList.add('hidden'));
+  const currentWeek = document.querySelector(`#week-${currentWeekId} .week-content`);
+  if(currentWeek) currentWeek.classList.remove('hidden');
+}
+
+function bindControls(){
+  document.getElementById('searchInput').addEventListener('input', applyFilters);
+  document.getElementById('statusFilter').addEventListener('change', applyFilters);
+  document.getElementById('weekFilter').addEventListener('change', applyFilters);
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+  document.getElementById('exportNotes').addEventListener('click', exportNotes);
+
+  document.getElementById('compactMode').checked = state.settings.compactMode;
+  document.getElementById('collapseCompleted').checked = state.settings.collapseCompleted;
+  document.getElementById('autoExpandCurrent').checked = state.settings.autoExpandCurrent;
+
+  ['compactMode','collapseCompleted','autoExpandCurrent'].forEach(id => {
+    document.getElementById(id).addEventListener('change', e => {
+      state.settings[id] = e.target.checked;
+      saveState();
+      if(id === 'compactMode') applyCompactMode();
+      if(id === 'autoExpandCurrent') applyAutoExpand();
+      applyFilters();
+    });
+  });
+
+  document.getElementById('expandAll').addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.week-content').forEach(el => el.classList.remove('hidden'));
+  });
+  document.getElementById('collapseAll').addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.week-content').forEach(el => el.classList.add('hidden'));
+  });
+  document.getElementById('resetProgress').addEventListener('click', e => {
+    e.preventDefault();
+    if(!confirm('سيتم حذف حالة الإكمال والملاحظات والإعدادات المحفوظة محليًا. هل تريد المتابعة؟')) return;
+    localStorage.removeItem(storageKey);
+    state = structuredClone(defaultState);
+    renderWeeks();
+    updateStats();
+  });
+}
+
+function exportNotes(){
+  const lines = [];
+  lines.push('منهج 42 يومًا لإتقان SEO و GEO');
+  lines.push('');
+  weeks.forEach(week => {
+    lines.push(week.title);
+    week.days.forEach(day => {
+      const id = dayId(day.n);
+      lines.push(`- اليوم ${day.n}: ${day.title}`);
+      lines.push(`  مكتمل: ${state.completed[id] ? 'نعم' : 'لا'}`);
+      lines.push(`  الملاحظة: ${state.notes[id] || ''}`);
+    });
+    lines.push('');
+  });
+  const blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'seo-geo-curriculum-notes.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+renderResources();
+renderNav();
+renderWeeks();
+updateStats();
+bindControls();
+applyFilters();
+</script>
+
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong> | مبنية على مراجع رسمية</p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="js/navigation.js"></script>
+</body>
+</html>

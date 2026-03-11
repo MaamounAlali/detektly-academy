@@ -1,0 +1,12 @@
+{
+  "name": "Detektly Academy",
+  "version": "1.0.0",
+  "description": "منصة المسارات التعليمية لـ SEO/GEO — موقع ثابت يُستضاف على GitHub Pages",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المرحلة التأسيسية من الصفر قبل SEO و GEO</title>
+  <style>
+    body { background: var(--bg); }
+    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; margin: 0; }
+    @media(max-width:1100px){ .app{grid-template-columns:1fr} }
+    
+    aside {
+      position: sticky; top: var(--nav-h); align-self: start; 
+      height: calc(100vh - var(--nav-h)); overflow: auto; 
+      background: rgba(10, 16, 32, 0.82); border-left: 1px solid var(--line); 
+      backdrop-filter: blur(16px); padding: 24px;
+    }
+    @media(max-width:1100px){
+      aside { position: relative; top: 0; height: auto; border-left: none; border-bottom: 1px solid var(--line); }
+    }
+
+    .side-brand {
+      padding: 18px; margin-bottom: 20px; 
+      background: linear-gradient(180deg, rgba(17, 24, 51, 0.96), rgba(12, 19, 39, 0.96)); 
+      border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .side-brand h1 { margin: 0 0 8px; font-size: 1.15rem; line-height: 1.35; color: var(--text); }
+    .side-brand p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+    
+    .w-stat { background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 14px; border: 1px solid var(--line-soft); }
+    .w-stat strong { display: block; font-size: 1.1rem; color: var(--accent); }
+    .w-stat span { display: block; color: var(--muted); font-size: 0.8rem; }
+    
+    .side-section { margin-top: 24px; }
+    .side-title { font-size: 0.78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 12px; }
+    
+    .side-nav { display: flex; flex-direction: column; gap: 6px; }
+    .side-link {
+      display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; 
+      color: var(--text); background: rgba(255, 255, 255, 0.02); text-decoration: none; 
+      font-size: 0.9rem; border: 1px solid transparent; transition: var(--transition);
+    }
+    .side-link:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--line-soft); text-decoration: none; }
+    .side-link label { cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .side-link small { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+    
+    .main-area { padding: 32px 40px 80px; }
+    @media(max-width:768px){ .main-area { padding: 24px 20px 60px; } }
+
+    .week-card {
+      background: linear-gradient(180deg, rgba(17, 24, 51, 0.96), rgba(12, 19, 39, 0.96)); 
+      border: 1px solid var(--line); border-radius: var(--radius-lg); 
+      box-shadow: var(--shadow); padding: 24px; margin: 32px 0;
+    }
+    .week-header { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; cursor: pointer; }
+    .week-header h3 { margin: 0; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+    .week-meta { min-width: 150px; text-align: left; }
+    
+    .day-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    @media(max-width:900px){ .day-grid { grid-template-columns: 1fr; } }
+    
+    .day-card {
+      background: rgba(255, 255, 255, 0.02); border: 1px solid var(--line-soft); 
+      border-radius: var(--radius); padding: 20px; position: relative; transition: var(--transition);
+    }
+    .day-card:hover { border-color: var(--line); background: rgba(255, 255, 255, 0.03); }
+    .day-card h4 { margin: 0 0 12px; font-size: 1.05rem; padding-left: 80px; }
+    .day-badge {
+      position: absolute; left: 20px; top: 18px; background: var(--bg-soft); 
+      border: 1px solid var(--line); padding: 4px 10px; border-radius: var(--radius-pill); 
+      font-size: 0.75rem; color: var(--muted);
+    }
+    
+    .day-card p, .day-card li { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+    .day-card ul { margin: 12px 0; padding-right: 20px; }
+    
+    .day-actions { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
+    .check { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; cursor: pointer; color: var(--muted); }
+    .check input { width: 18px; height: 18px; cursor: pointer; }
+    
+    .notes { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .notes input, .notes textarea {
+      width: 100%; background: rgba(0,0,0,0.2); color: var(--text); 
+      border-radius: 12px; padding: 12px; border: 1px solid var(--line-soft); font: inherit; transition: var(--transition);
+    }
+    .notes input:focus, .notes textarea:focus { border-color: var(--accent); outline: none; background: rgba(0,0,0,0.3); }
+    .notes textarea { min-height: 80px; resize: vertical; }
+
+    .hero-section {
+      padding: 32px; margin-bottom: 32px; 
+      background: linear-gradient(135deg, rgba(14, 23, 45, 0.98), rgba(20, 31, 58, 0.96)); 
+      border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+    }
+    .hero-section h2 { margin: 0 0 12px; font-size: 1.6rem; color: var(--text); }
+    .hero-section p { margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
+
+    .mini-progress { height: 6px; background: rgba(0,0,0,0.3); border-radius: 10px; overflow: hidden; margin-top: 10px; }
+    .mini-progress > div { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width 0.5s ease; }
+
+    .resource-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .resource-list a {
+      display: flex; align-items: center; gap: 10px; padding: 14px 18px; 
+      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); 
+      border-radius: 14px; transition: var(--transition); font-size: 0.9rem;
+    }
+    .resource-list a:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--accent); text-decoration: none; }
+
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; padding: 16px; 
+      background: rgba(255, 255, 255, 0.02); border-radius: 16px; border: 1px solid var(--line-soft);
+    }
+    .toolbar input { flex: 2; min-width: 200px; background: rgba(0,0,0,0.2); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px 16px; color: var(--text); }
+    .toolbar select { flex: 1; background: rgba(0,0,0,0.2); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px; color: var(--text); }
+    .toolbar button { padding: 10px 20px; border-radius: 12px; border: 1px solid var(--line-soft); background: var(--panel); color: var(--text); cursor: pointer; transition: var(--transition); font-weight: 600; }
+    .toolbar button:hover { background: var(--line); }
+
+    .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+    @media(max-width:800px){ .overview-grid { grid-template-columns: 1fr; } }
+    
+    .quote { border-right: 3px solid var(--accent); padding: 16px 20px; margin: 16px 0; color: var(--muted); background: rgba(255, 255, 255, .02); border-radius: 0 12px 12px 0; }
+    .hidden { display: none !important; }
+    .day-title-link:hover { color: var(--accent) !important; text-decoration: none; }
+</style>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="index.html">الرئيسية</a></li><li><a href="paths.html">المسارات</a></li><li><a href="exercises.html">التمارين</a></li><li><a href="progress.html">تقدّمي</a></li><li><a href="resources.html">الموارد</a></li><li><a href="faq.html">الأسئلة</a></li><li><a href="about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="paths.html"><i class="ph ph-books"></i> المسارات</a><a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="resources.html"><i class="ph ph-link"></i> الموارد</a><a href="faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+
+<div class="app">
+  <aside>
+    <div class="side-brand">
+      <h1>المرحلة التأسيسية من الصفر قبل SEO و GEO</h1>
+      <p>منهج 28 يومًا لشخص ضعيف أو أمي تقنيًا، ليفهم الويب والبحث والصفحات والقياس قبل الدخول إلى منهج 42 يومًا.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
+        <div class="w-stat"><strong id="doneCount">0</strong><span>أيام مكتملة</span></div>
+        <div class="w-stat"><strong id="remainingCount">28</strong><span>أيام متبقية</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="globalProgress" style="width:0%"></div></div>
+      <span class="muted" id="progressLabel" style="font-size:0.85rem">0%</span>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">إعدادات العرض</div>
+      <div class="side-nav">
+        <div class="side-link"><label><input type="checkbox" id="compactMode"> عرض مضغوط</label></div>
+        <div class="side-link"><label><input type="checkbox" id="collapseCompleted"> طي الأيام المكتملة</label></div>
+        <div class="side-link"><label><input type="checkbox" id="autoExpandCurrent"> فتح الأسبوع الجاري تلقائيًا</label></div>
+      </div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">التنقل السريع</div>
+      <div class="side-nav" id="weekNav"></div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">إجراءات</div>
+      <div class="side-nav">
+        <a href="#" class="side-link" id="expandAll">فتح كل الأسابيع</a>
+        <a href="#" class="side-link" id="collapseAll">طي كل الأسابيع</a>
+        <a href="#" class="side-link" id="resetProgress">تصفير التقدم والملاحظات</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <div style="margin-bottom: 24px; display: flex; align-items: center;">
+      <a href="paths.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 500; padding: 8px 16px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); color: var(--muted); text-decoration: none; transition: all 0.3s ease;">
+        <i class="ph ph-caret-right" style="font-size: 1.1rem;"></i>
+        العودة إلى المسارات التعليمية
+      </a>
+    </div>
+
+    
+
+    <section class="hero-section">
+      <h2>الهدف من هذه المرحلة</h2>
+      <p>هذه ليست مرحلة احتراف SEO (تحسين الظهور في محركات البحث) وGEO (تحسين الظهور في محركات الإجابة التوليدية). هذه مرحلة تأسيس: كيف يعمل الويب، ما هي الصفحة والرابط والنطاق، كيف تظهر الصفحات في البحث، ما معنى نتائج البحث، وما الذي يمكن قياسه أصلًا.</p>
+      <div class="pill-row" style="margin-top:16px">
+        <span class="pill">Website basics (أساسيات الموقع)</span>
+        <span class="pill">Search basics (أساسيات البحث)</span>
+        <span class="pill">Page anatomy (تركيب الصفحة)</span>
+        <span class="pill">Search results (نتائج البحث)</span>
+        <span class="pill">Basic analytics (القياس الأساسي)</span>
+        <span class="pill">Readiness for SEO/GEO (الجاهزية للمرحلة التالية)</span>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <input type="text" id="searchInput" placeholder="ابحث عن يوم أو موضوع مثل: domain أو نتائج البحث أو Search Console" />
+      <select id="statusFilter">
+        <option value="all">كل الأيام</option>
+        <option value="open">غير المكتملة</option>
+        <option value="done">المكتملة</option>
+      </select>
+      <select id="weekFilter">
+        <option value="all">كل الأسابيع</option>
+      </select>
+      <button id="printBtn">طباعة</button>
+      <button class="btn-secondary" id="exportNotes">تصدير الملاحظات</button>
+    </section>
+
+    <section class="overview-grid">
+      <div class="card">
+        <h3 style="margin-top:0; margin-bottom:10px">كيف تُستخدم هذه الخطة</h3>
+        <ul>
+          <li>45 إلى 75 دقيقة يوميًا تكفي.</li>
+          <li>اقرأ قليلًا، ثم اشرح بلسانك، ثم طبّق على مواقع حقيقية.</li>
+          <li>ممنوع القفز إلى أدوات معقدة أو مصطلحات متقدمة قبل فهم الأساس.</li>
+          <li>إذا عجزت عن شرح المفهوم لطفل ذكي، فأنت لم تفهمه بعد.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0; margin-bottom:10px">إدارة البيانات والتخزين المحلي</h3>
+        <ul>
+          <li>إكمال كل يوم.</li>
+          <li>ملاحظاتك اليومية القصيرة.</li>
+          <li>آخر يوم عملت عليه.</li>
+          <li>إعدادات العرض والطي والبحث.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-top:0 ; margin-bottom:10px">متى تنتقل إلى المنهج التالي؟</h3>
+      <p class="quote">تنتقل إلى منهج 42 يومًا فقط عندما تصبح قادرًا على تفسير: ما هو الموقع، ما هي الصفحة، ما هو الرابط، كيف تظهر نتائج البحث، ما الفرق بين الزحف والفهرسة والظهور، وما الذي تقيسه Search Console (أداة مراقبة أداء البحث).</p>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-top:0; margin-bottom:10px">المراجع الأساسية في هذه المرحلة</h3>
+      <div class="resource-list">
+        <a href="https://developers.google.com/search/docs/fundamentals/how-search-works" target="_blank">Google: How Search Works (كيف يعمل البحث)</a>
+        <a href="https://developers.google.com/search/docs/essentials" target="_blank">Google: Search Essentials (أساسيات الظهور في البحث)</a>
+        <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank">Google: SEO Starter Guide (دليل البداية)</a>
+        <a href="https://developers.google.com/search/docs/monitor-debug/search-console-start" target="_blank">Google: Search Console basics (أساسيات أداة مراقبة أداء البحث)</a>
+        <a href="https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a" target="_blank">Bing: Webmaster Guidelines (إرشادات بينغ)</a>
+        <a href="https://schema.org/docs/documents.html" target="_blank">schema.org: Documentation (وثائق البيانات المنظمة)</a>
+      </div>
+    </section>
+
+    <div id="weeksContainer"></div>
+    <div class="footer-space"></div>
+  </main>
+</div>
+
+<script>
+const curriculum = [
+  {
+    week: 1,
+    title: 'الأسبوع 1 — الويب من الصفر',
+    intro: 'هذا الأسبوع يزيل الضباب: ما هو الموقع، ما هي الصفحة، ما هو الرابط، وما الفرق بين المتصفح ومحرك البحث.',
+    days: [
+      {day:1,title:'ما هو الموقع أصلًا؟',goal:'تفهم الفرق بين website (موقع) وwebpage (صفحة) وhomepage (الصفحة الرئيسية).',read:['اقرأ مقالات تمهيدية قصيرة من أي مصدر مبسط ثم راقب 5 مواقع حقيقية بعين جديدة.'],tasks:['اكتب تعريفًا بسيطًا للموقع والصفحة والصفحة الرئيسية.','افتح 5 مواقع وسمِّ نوع كل صفحة تراها.'],output:'ورقة واحدة: الموقع ليس صفحة واحدة بل مجموعة صفحات مترابطة.'},
+      {day:2,title:'ما هو الرابط URL؟',goal:'تفهم أن URL (الرابط الكامل) له أجزاء وأنه ليس مجرد نص نضغط عليه.',read:['شاهد أمثلة حية على روابط الصفحات داخل 5 مواقع.'],tasks:['قسّم 10 روابط إلى: النطاق والمسار والمعلمات إن وجدت.','ميّز بين الصفحة الرئيسية وصفحة داخلية من الرابط فقط.'],output:'قائمة 10 روابط مع شرحها بلسانك.'},
+      {day:3,title:'ما هو domain وما هو hosting؟',goal:'تفهم الفرق بين domain (اسم النطاق) وhosting (الاستضافة) وserver (الخادم).',read:['ابحث في شرح مبسط موثوق عن العلاقة بين النطاق والاستضافة والخادم.'],tasks:['ارسم مخططًا بسيطًا: المستخدم ← المتصفح ← النطاق ← الخادم ← الصفحة.','اشرح الفرق لشخص آخر بجملة واحدة لكل مصطلح.'],output:'رسم بسيط يثبت أن المصطلحات لم تعد مختلطة عندك.'},
+      {day:4,title:'المتصفح ليس محرك البحث',goal:'تفهم الفرق بين browser (المتصفح) وsearch engine (محرك البحث).',read:['لاحظ الفرق بين كتابة عنوان موقع مباشر وبين البحث عنه في Google أو Bing.'],tasks:['افتح نفس الصفحة بطريقتين: برابط مباشر ثم عبر البحث.','اكتب لماذا وجود الصفحة على الويب لا يعني ظهورها في نتائج البحث.'],output:'فقرة قصيرة: المتصفح يفتح، ومحرك البحث يكتشف ويرتب.'},
+      {day:5,title:'تركيب الصفحة بصريًا',goal:'تتعرف على title (عنوان الصفحة) وheading (العنوان الداخلي) وmenu (القائمة) وfooter (التذييل).',read:['افحص 5 صفحات مختلفة ولاحظ مكونات كل صفحة.'],tasks:['التقط قائمة بأجزاء الصفحة الأساسية.','قارن بين صفحة مقال وصفحة منتج وصفحة فئة.'],output:'مخطط صفحة مع تسمية الأجزاء.'},
+      {day:6,title:'مراجعة تطبيقية على 3 مواقع',goal:'تثبت أنك لم تحفظ مصطلحات فقط.',read:['لا قراءة جديدة.'],tasks:['حلل 3 مواقع وفسر: ما هو الموقع، ما نوع الصفحات، كيف تتنقل داخله.'],output:'تحليل مختصر من صفحة واحدة.'},
+      {day:7,title:'اختبار ذاتي للأسبوع الأول',goal:'تقفل الأساس قبل التقدم.',read:['راجع ملاحظاتك فقط.'],tasks:['اشرح من ذاكرتك: الموقع، الصفحة، الرابط، النطاق، الاستضافة، المتصفح، محرك البحث.'],output:'اختبار شفهي أو مكتوب من 10 دقائق.'}
+    ]
+  },
+  {
+    week: 2,
+    title: 'الأسبوع 2 — كيف تظهر الصفحات في البحث',
+    intro: 'هنا تبدأ بفهم البحث نفسه: كيف تنتقل الصفحة من موجودة إلى قابلة للظهور.',
+    days: [
+      {day:8,title:'كيف يعمل البحث بصورة عامة',goal:'تفهم المسار العام للزحف والفهرسة والظهور.',read:['Google: How Search Works.'],tasks:['اكتب المراحل الثلاث بلغتك.','ارسم كيف تنتقل الصفحة من الويب إلى نتائج البحث.'],output:'ورقة بعنوان: رحلة الصفحة إلى نتائج البحث.'},
+      {day:9,title:'ما هو crawling؟',goal:'تفهم crawling (الزحف) دون تعقيد تقني زائد.',read:['جزء الزحف من How Search Works وSearch Essentials.'],tasks:['اكتب 5 أسباب قد تمنع الزحف أو تقلله.','افترض صفحة جديدة واشرح كيف قد يكتشفها محرك البحث.'],output:'فقرة: الزحف يعني الاكتشاف والوصول الأولي.'},
+      {day:10,title:'ما هو indexing؟',goal:'تفهم indexing (الفهرسة) وأن الصفحة قد تُزحف ولا تُفهرس.',read:['Google: Search Essentials وHow Search Works.'],tasks:['اكتب الفرق بين الزحف والفهرسة.','اكتب 3 أمثلة لصفحات قد لا تكون مفيدة للفهرسة.'],output:'ورقة قصيرة: ليس كل ما يُزار يُفهرس.'},
+      {day:11,title:'ما معنى الظهور في النتائج؟',goal:'تفهم serving/ranking (العرض والترتيب) كمفهوم عام.',read:['أكمل How Search Works.'],tasks:['افتح 3 نتائج بحث وسجّل لماذا قد يختارها المستخدم.','اشرح الفرق بين موجود في الفهرس ومرئي في النتيجة الأولى.'],output:'قائمة أسباب تؤثر على فرصة الظهور والضغط.'},
+      {day:12,title:'قراءة نتائج البحث بعين واعية',goal:'تفهم title link (عنوان النتيجة) وsnippet (المقتطف) وURL الظاهر.',read:['SEO Starter Guide حول العناوين والمقتطفات.'],tasks:['حلل 10 نتائج بحث.','حدد ما الذي يجعلك تضغط أو تتجاهل.'],output:'معيار شخصي أولي لقراءة النتائج.'},
+      {day:13,title:'Google وBing ليسا نسخة واحدة',goal:'تفهم أن المبادئ متشابهة لكن المنصات مختلفة.',read:['Bing Webmaster Guidelines النظرة العامة.'],tasks:['قارن لغويًا بين إرشادات Google وBing.','اكتب 3 تشابهات و3 فروقات في العرض أو الخطاب.'],output:'مقارنة مختصرة من نصف صفحة.'},
+      {day:14,title:'اختبار الأسبوع الثاني',goal:'تثبيت مفاهيم البحث الأساسية.',read:['راجع ملاحظاتك ومخططاتك فقط.'],tasks:['اشرح: الزحف، الفهرسة، الظهور، النتيجة، المقتطف.'],output:'إجابة مكتوبة بلا رجوع للمراجع.'}
+    ]
+  },
+  {
+    week: 3,
+    title: 'الأسبوع 3 — نية البحث والصفحة المناسبة',
+    intro: 'المبتدئ يظن أن البحث كلمات مفتاحية فقط. الصحيح: المستخدم له نية، والصفحة يجب أن تناسبها.',
+    days: [
+      {day:15,title:'ما هي نية البحث؟',goal:'تفهم search intent (نية البحث) بصياغة عملية.',read:['SEO Starter Guide وأمثلة من نتائج البحث الحقيقية.'],tasks:['اكتب تعريفًا بسيطًا لنية البحث.','اعطِ 10 أمثلة من حياتك اليومية.'],output:'ورقة: لماذا يبحث الناس أصلًا؟'},
+      {day:16,title:'أنواع النية الأساسية',goal:'تميّز بين informational وcommercial وnavigational وtransactional.',read:['راجع استعلامات حقيقية في Google وBing.'],tasks:['صنّف 20 استعلامًا إلى الأنواع الأربعة.'],output:'جدول استعلامات مصنفة.'},
+      {day:17,title:'أي صفحة تناسب أي نية؟',goal:'تفهم أن المقال لا يصلح لكل شيء، ولا صفحة المنتج تصلح لكل سؤال.',read:['أمثلة مواقع حقيقية.'],tasks:['اربط 20 استعلامًا بنوع الصفحة الأنسب.'],output:'خريطة استعلام ← نوع صفحة.'},
+      {day:18,title:'قراءة صفحة جيدة وقراءة صفحة فاشلة',goal:'تتعلم الملاحظة، لا الحفظ.',read:['قارن بين صفحتين لنفس الموضوع.'],tasks:['اشرح لماذا صفحة معينة تخدم النية أفضل من أخرى.'],output:'مقارنة بين صفحتين.'},
+      {day:19,title:'العنوان ليس زخرفة',goal:'تفهم دور title وheading في توجيه الفهم والنقر.',read:['SEO Starter Guide حول العناوين.'],tasks:['أعد كتابة 10 عناوين ضعيفة بطريقة أوضح وأصدق.'],output:'قبل/بعد لعناوين صفحات.'},
+      {day:20,title:'الروابط الداخلية والتنقل',goal:'تفهم أن بنية التنقل جزء من الفهم وليس مجرد تصميم.',read:['SEO Starter Guide حول navigation والروابط.'],tasks:['حلل قائمة التنقل في موقع واحد.','اشرح هل تنقل المستخدم بشكل منطقي أم لا.'],output:'تقييم تنقل لموقع واحد.'},
+      {day:21,title:'اختبار الأسبوع الثالث',goal:'تغلق أول طبقة حقيقية من عقلية SEO.',read:['راجع أمثلتك فقط.'],tasks:['اختر 10 استعلامات جديدة وصنّفها واربط كلًا منها بصفحة مناسبة.'],output:'اختبار عملي سريع.'}
+    ]
+  },
+  {
+    week: 4,
+    title: 'الأسبوع 4 — القياس البسيط والاستعداد للمرحلة التالية',
+    intro: 'هنا تتعلم ما الذي يمكن رؤيته وقياسه، وما الذي يعنيه الأداء في البحث، ثم تقرر هل أنت جاهز لمنهج 42 يومًا.',
+    days: [
+      {day:22,title:'ما هي Search Console؟',goal:'تفهم دور Search Console (أداة مراقبة أداء البحث) كمصدر حقيقة أساسي.',read:['Google: Get started with Search Console.'],tasks:['اكتب ماذا تعطيك الأداة على مستوى الفكرة.','ميّز بينها وبين Google Analytics.'],output:'ملخص: ماذا تراقب Search Console؟'},
+      {day:23,title:'impressions وclicks وCTR',goal:'تفهم المصطلحات الأساسية دون عمق إحصائي معقد.',read:['مواد Search Console الأساسية.'],tasks:['اكتب تعريفًا بسيطًا لكل مصطلح.','أعط مثالًا على زيادة الظهور دون زيادة النقر.'],output:'بطاقة مفاهيم القياس الأساسية.'},
+      {day:24,title:'كيف أشخّص مشكلة بشكل بدائي؟',goal:'تبني عقلًا تشخيصيًا أوليًا.',read:['راجع Search Essentials وSEO Starter Guide.'],tasks:['اصنع شجرة قرار بسيطة: هل المشكلة زحف أم فهرسة أم عنوان أم نية أم جودة.'],output:'ورقة تشخيص من صفحة واحدة.'},
+      {day:25,title:'مقدمة تمهيدية إلى structured data',goal:'لا للإتقان هنا، فقط إزالة رهبة المصطلح.',read:['Google: Intro to structured data.','schema.org documentation overview.'],tasks:['اكتب ما معنى أن تكون الصفحة مفهومة آليًا.','حدد 3 صفحات قد تستفيد من وصف منظم أوضح.'],output:'فقرة: البيانات المنظمة ليست سحرًا لكنها توضيح.'},
+      {day:26,title:'مقدمة تمهيدية إلى AI features وGEO',goal:'تفهم أن GEO ليس بديلًا عن SEO بل طبقة فوقه.',read:['Google: AI features and your website.'],tasks:['اكتب 5 نقاط: ما الذي يبقى نفسه بين SEO وGEO؟','ما الذي يتغير في أسلوب التفكير؟'],output:'ورقة قصيرة: SEO أولًا ثم GEO.'},
+      {day:27,title:'تقييم جاهزيتك للمنهج التالي',goal:'تقرر بصدق هل الأساس صار موجودًا.',read:['راجع كل أسابيعك السابقة.'],tasks:['جاوب من ذاكرتك على 15 سؤالًا أساسيًا.','حدد نقاط ضعفك المتبقية.'],output:'قائمة الجاهزية ونقاط النقص.'},
+      {day:28,title:'الاختبار النهائي وخطة الانتقال',goal:'إغلاق المرحلة التأسيسية بشكل منضبط.',read:['لا قراءة جديدة.'],tasks:['اكتب دراسة من صفحتين بعنوان: كيف أفهم الويب والبحث قبل SEO وGEO.','ضع تاريخ بدء منهج 42 يومًا أو قرار إعادة بعض الأيام.'],output:'وثيقة التخرج من المرحلة التأسيسية.'}
+    ]
+  }
+];
+
+const storageKey = 'seo-geo-foundation-28';
+const defaultState = { completed:{}, notes:{}, settings:{ compactMode:false, collapseCompleted:false, autoExpandCurrent:true }, lastDay:null, search:'', statusFilter:'all', weekFilter:'all', collapsedWeeks:{} };
+let state = loadState();
+
+function loadState(){
+  try{ return { ...defaultState, ...JSON.parse(localStorage.getItem(storageKey) || '{}'), settings:{...defaultState.settings, ...(JSON.parse(localStorage.getItem(storageKey) || '{}').settings || {})} }; }
+  catch(e){ return structuredClone(defaultState); }
+}
+function saveState(){ localStorage.setItem(storageKey, JSON.stringify(state)); }
+
+function weekCompletion(week){
+  const total = week.days.length;
+  const done = week.days.filter(d => state.completed[d.day]).length;
+  return {done,total,pct: Math.round(done/total*100)};
+}
+function globalCompletion(){
+  const total = curriculum.reduce((a,w)=>a+w.days.length,0);
+  const done = curriculum.flatMap(w=>w.days).filter(d=>state.completed[d.day]).length;
+  return {done,total,pct:Math.round(done/total*100)};
+}
+
+function render(){
+  document.body.classList.toggle('compact', !!state.settings.compactMode);
+  renderSidebar();
+  renderWeeks();
+  bindControls();
+}
+
+function renderSidebar(){
+  const g = globalCompletion();
+  document.getElementById('doneCount').textContent = g.done;
+  document.getElementById('remainingCount').textContent = g.total - g.done;
+  document.getElementById('globalProgress').style.width = g.pct + '%';
+  document.getElementById('progressLabel').textContent = g.pct + '%';
+
+  document.getElementById('compactMode').checked = !!state.settings.compactMode;
+  document.getElementById('collapseCompleted').checked = !!state.settings.collapseCompleted;
+  document.getElementById('autoExpandCurrent').checked = !!state.settings.autoExpandCurrent;
+
+  const weekNav = document.getElementById('weekNav');
+  const weekFilter = document.getElementById('weekFilter');
+  weekNav.innerHTML = '';
+  weekFilter.innerHTML = '<option value="all">كل الأسابيع</option>';
+  curriculum.forEach(w=>{
+    const c = weekCompletion(w);
+    const a = document.createElement('a');
+    a.href = '#week-' + w.week;
+    a.className = 'nav-link';
+    a.innerHTML = `<strong>${w.title}</strong><small>${c.done}/${c.total} أيام</small>`;
+    weekNav.appendChild(a);
+
+    const opt = document.createElement('option');
+    opt.value = String(w.week); opt.textContent = w.title; weekFilter.appendChild(opt);
+  });
+  weekFilter.value = state.weekFilter || 'all';
+  document.getElementById('statusFilter').value = state.statusFilter || 'all';
+  document.getElementById('searchInput').value = state.search || '';
+}
+
+function renderWeeks(){
+  const q = (state.search || '').trim().toLowerCase();
+  const status = state.statusFilter || 'all';
+  const weekFilter = state.weekFilter || 'all';
+  const container = document.getElementById('weeksContainer');
+  container.innerHTML = '';
+
+  curriculum.forEach(w=>{
+    if(weekFilter !== 'all' && String(w.week) !== String(weekFilter)) return;
+    const c = weekCompletion(w);
+    const weekEl = document.createElement('section');
+    weekEl.className = 'week-card';
+    weekEl.id = 'week-' + w.week;
+
+    const shouldCollapse = state.collapsedWeeks[w.week] ?? false;
+    const contentCls = shouldCollapse ? 'week-content hidden' : 'week-content';
+
+    weekEl.innerHTML = `
+      <div class="week-header" data-week-toggle="${w.week}">
+        <div>
+          <h3>${w.title}</h3>
+          <p>${w.intro}</p>
+        </div>
+        <div class="week-meta">
+          <div class="muted">${c.done} / ${c.total} مكتمل</div>
+          <div class="mini-progress"><div style="width:${c.pct}%"></div></div>
+        </div>
+      </div>
+      <div class="${contentCls}" id="week-content-${w.week}">
+        <div class="day-grid"></div>
+      </div>`;
+
+    const dayGrid = weekEl.querySelector('.day-grid');
+    const pathBase = 'paths/seo-geo-foundation-28-day';
+    w.days.forEach(d=>{
+      const done = !!state.completed[d.day];
+      if(status === 'open' && done) return;
+      if(status === 'done' && !done) return;
+
+      const hay = [w.title, w.intro, d.title, d.goal, ...(d.read||[]), ...(d.tasks||[]), d.output].join(' ').toLowerCase();
+      if(q && !hay.includes(q)) return;
+
+      const dayNum = String(d.day).padStart(2, '0');
+      const dayPageUrl = pathBase + '/day-' + dayNum + '.html';
+      const dayEl = document.createElement('article');
+      dayEl.className = 'day-card';
+      if(done && state.settings.collapseCompleted) dayEl.classList.add('hidden');
+      dayEl.dataset.day = d.day;
+      dayEl.innerHTML = `
+        <span class="day-badge">اليوم ${d.day}</span>
+        <h4><a href="${dayPageUrl}" style="color:inherit;text-decoration:none;font-weight:inherit" class="day-title-link">${d.title}</a></h4>
+        <p><strong>الهدف:</strong> ${d.goal}</p>
+        <p><strong>القراءة / الملاحظة:</strong></p>
+        <ul>${(d.read||[]).map(x=>`<li>${x}</li>`).join('')}</ul>
+        <p><strong>التمرين:</strong></p>
+        <ul>${(d.tasks||[]).map(x=>`<li>${x}</li>`).join('')}</ul>
+        <p><strong>المخرج المطلوب:</strong> ${d.output}</p>
+        <div class="day-actions">
+          <label class="check"><input type="checkbox" data-complete="${d.day}" ${done?'checked':''}> تم هذا اليوم</label>
+          <a href="${dayPageUrl}" class="btn" style="background:var(--accent); color:var(--bg); padding:8px 16px; font-size:0.85rem; text-decoration:none; border-radius:10px">اقرأ الدرس الكامل</a>
+          <button type="button" class="btn" style="background:var(--line); padding:8px 16px; font-size:0.85rem" data-mark-current="${d.day}">اجعله اليوم الحالي</button>
+        </div>
+        <div class="notes">
+          <input type="text" placeholder="ملخص قصير لهذا اليوم" data-note-title="${d.day}" value="${escapeHtml((state.notes[d.day]||{}).title || '')}">
+          <textarea placeholder="اكتب ملاحظاتك، ما الذي فهمته، وما الذي بقي غامضًا" data-note-body="${d.day}">${escapeHtml((state.notes[d.day]||{}).body || '')}</textarea>
+        </div>`;
+      dayGrid.appendChild(dayEl);
+    });
+
+    if(dayGrid.children.length) container.appendChild(weekEl);
+  });
+
+  if(state.settings.autoExpandCurrent && state.lastDay){
+    const currentWeek = curriculum.find(w=>w.days.some(d=>d.day === state.lastDay));
+    if(currentWeek){ state.collapsedWeeks[currentWeek.week] = false; }
+  }
+}
+
+function bindControls(){
+  document.querySelectorAll('[data-complete]').forEach(el=>{
+    el.onchange = e => {
+      const day = Number(e.target.dataset.complete);
+      state.completed[day] = e.target.checked;
+      if(e.target.checked) state.lastDay = day;
+      saveState(); render();
+    };
+  });
+  document.querySelectorAll('[data-note-title]').forEach(el=>{
+    el.oninput = e => {
+      const day = Number(e.target.dataset.noteTitle);
+      state.notes[day] = state.notes[day] || {};
+      state.notes[day].title = e.target.value;
+      saveState();
+    };
+  });
+  document.querySelectorAll('[data-note-body]').forEach(el=>{
+    el.oninput = e => {
+      const day = Number(e.target.dataset.noteBody);
+      state.notes[day] = state.notes[day] || {};
+      state.notes[day].body = e.target.value;
+      saveState();
+    };
+  });
+  document.querySelectorAll('[data-mark-current]').forEach(el=>{
+    el.onclick = e => { state.lastDay = Number(e.target.dataset.markCurrent); saveState(); render(); };
+  });
+  document.querySelectorAll('[data-week-toggle]').forEach(el=>{
+    el.onclick = () => {
+      const w = Number(el.dataset.weekToggle);
+      state.collapsedWeeks[w] = !state.collapsedWeeks[w];
+      saveState(); render();
+    };
+  });
+
+  const searchInput = document.getElementById('searchInput');
+  searchInput.oninput = e => { state.search = e.target.value; saveState(); render(); };
+  document.getElementById('statusFilter').onchange = e => { state.statusFilter = e.target.value; saveState(); render(); };
+  document.getElementById('weekFilter').onchange = e => { state.weekFilter = e.target.value; saveState(); render(); };
+
+  document.getElementById('compactMode').onchange = e => { state.settings.compactMode = e.target.checked; saveState(); render(); };
+  document.getElementById('collapseCompleted').onchange = e => { state.settings.collapseCompleted = e.target.checked; saveState(); render(); };
+  document.getElementById('autoExpandCurrent').onchange = e => { state.settings.autoExpandCurrent = e.target.checked; saveState(); render(); };
+
+  document.getElementById('expandAll').onclick = e => { e.preventDefault(); curriculum.forEach(w=>state.collapsedWeeks[w.week]=false); saveState(); render(); };
+  document.getElementById('collapseAll').onclick = e => { e.preventDefault(); curriculum.forEach(w=>state.collapsedWeeks[w.week]=true); saveState(); render(); };
+  document.getElementById('resetProgress').onclick = e => {
+    e.preventDefault();
+    if(!confirm('سيتم حذف حالة الإكمال والملاحظات والإعدادات المحفوظة محليًا. هل تريد المتابعة؟')) return;
+    localStorage.removeItem(storageKey);
+    state = structuredClone(defaultState);
+    render();
+  };
+  document.getElementById('printBtn').onclick = () => window.print();
+  document.getElementById('exportNotes').onclick = exportNotes;
+}
+
+function exportNotes(){
+  const lines = [];
+  lines.push('المرحلة التأسيسية من الصفر قبل SEO و GEO');
+  lines.push('');
+  curriculum.forEach(w=>{
+    lines.push(w.title);
+    lines.push('-'.repeat(w.title.length));
+    w.days.forEach(d=>{
+      const note = state.notes[d.day] || {};
+      const done = state.completed[d.day] ? 'مكتمل' : 'غير مكتمل';
+      lines.push(`اليوم ${d.day}: ${d.title} [${done}]`);
+      if(note.title) lines.push(`ملخص: ${note.title}`);
+      if(note.body) lines.push(note.body);
+      lines.push('');
+    });
+    lines.push('');
+  });
+  const blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'seo_geo_foundation_notes.txt';
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(a.href);
+  a.remove();
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;');
+}
+
+render();
+</script>
+
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong> | مبنية على مراجع رسمية</p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="js/navigation.js"></script>
+</body>
+</html>

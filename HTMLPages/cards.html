@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>بطاقات المصطلحات التقنية — Detektly Academy</title>
+<meta content="بطاقات مصطلحات تقنية تشرح SEO و GEO والذكاء الاصطناعي بلغة مبسطة وأمثلة واقعية." name="description"/>
+<link href="brand/logo/fav.ico" rel="icon" type="image/x-icon"/>
+<link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="main-nav">
+<div class="nav-inner">
+<a class="nav-brand" href="index.html">
+<img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/>
+</a>
+<ul class="nav-links">
+<li><a href="index.html">الرئيسية</a></li>
+<li><a href="paths.html">المسارات</a></li>
+<li><a href="exercises.html">التمارين</a></li>
+<li><a href="progress.html">تقدّمي</a></li>
+<li><a href="resources.html">الموارد</a></li>
+<li><a href="faq.html">الأسئلة</a></li>
+<li><a href="about.html">عن المنصة</a></li>
+</ul>
+<button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button>
+</div>
+</nav>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+<button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button>
+<a href="index.html"><i class="ph ph-house"></i> الرئيسية</a>
+<a href="paths.html"><i class="ph ph-books"></i> المسارات التعليمية</a>
+<a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a>
+<a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a>
+<a href="resources.html"><i class="ph ph-link"></i> الموارد والأدوات</a>
+<a href="faq.html"><i class="ph ph-question"></i> الأسئلة الشائعة</a>
+<a href="about.html"><i class="ph ph-info"></i> عن المنصة</a>
+<a href="dashboard.html"><i class="ph ph-target"></i> لوحة التحكم</a>
+</div>
+<main class="wrap page-content">
+<section class="hero anim-fade">
+<div class="hero-content">
+<div class="eyebrow"><i class="ph ph-book-open-text"></i> Detektly Glossary Cards</div>
+<h1>بطاقات <span class="text-gradient">المصطلحات التقنية</span></h1>
+<p>
+        هذه الصفحة تجمع المصطلحات الأكثر تكرارًا وأهمية في سياق المنتج. كل بطاقة تشرح المصطلح بلغة مباشرة وتربطه بمثال واقعي.
+      </p>
+<div class="stat-grid grid-4 mt-3">
+<div class="stat-card"><span class="stat-num" id="totalCount">0</span><span class="stat-label">مصطلحًا موضحًا</span></div>
+<div class="stat-card"><span class="stat-num" id="favCount">0</span><span class="stat-label">مفضلة محفوظة</span></div>
+<div class="stat-card"><span class="stat-num" id="visibleCount">0</span><span class="stat-label">نتائج ظاهرة الآن</span></div>
+<div class="stat-card"><span class="stat-num" id="categoryCount">5</span><span class="stat-label">محاور رئيسية</span></div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="card" style="padding:20px; display:flex; gap:16px; flex-wrap:wrap; align-items:center">
+<input id="searchInput" placeholder="ابحث عن مصطلح: SEO, RBAC, Verification..." style="flex:1; min-width:250px; padding:12px; border-radius:12px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text)" type="search"/>
+<select id="categorySelect" style="padding:12px; border-radius:12px; border:1px solid var(--line); background:var(--bg-soft); color:var(--text)">
+<option value="all">كل التصنيفات</option>
+</select>
+<button class="btn btn-secondary" id="favoritesOnly"><i class="ph ph-star"></i> عرض المفضلة فقط</button>
+<button class="btn btn-ghost" id="resetFilters"><i class="ph ph-arrow-counter-clockwise"></i> إعادة الضبط</button>
+</div>
+</section>
+<div id="content"></div>
+<div class="card" id="emptyState" style="display:none; text-align:center; padding:40px">
+<p class="muted">لا توجد نتائج مطابقة للبحث أو التصفية الحالية.</p>
+</div>
+</main>
+<footer class="main-footer">
+<div class="footer-inner">
+<p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong> | مبنية على مراجع رسمية من Google وBing وSchema.org</p>
+<div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div>
+</div>
+</footer>
+<script src="js/navigation.js"></script>
+<script>
+    const cards = [
+      {
+        category: 'SEO & AI Visibility',
+        term: 'SEO',
+        termEn: 'Search Engine Optimization',
+        brief: 'تحسين ظهور موقعك في نتائج محركات البحث عبر إصلاح المشاكل التقنية، تحسين الصفحات، ورفع فرص النقر والظهور.',
+        example: 'مثال واقعي: صفحة الأسعار عندك لا تظهر جيدًا في جوجل لأن عنوانها ضعيف وفيها noindex. إصلاح ذلك جزء من SEO.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'GEO',
+        termEn: 'Generative Engine Optimization',
+        brief: 'تحسين قابلية ظهور علامتك ومحتواك داخل إجابات المحركات التوليدية مثل ChatGPT وGemini، لا فقط داخل صفحة نتائج جوجل.',
+        example: 'مثال واقعي: بدل أن يسأل العميل جوجل عن أفضل منصة SEO، يسأل ChatGPT مباشرة. GEO يركز على أن تُذكر منصتك داخل هذه الإجابة.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'LLM',
+        termEn: 'Large Language Model',
+        brief: 'نموذج لغوي كبير يولّد الإجابات ويحلل النصوص. في مشروعك ظهر في سياق قياس ظهور العلامة داخل إجابات النماذج.',
+        example: 'مثال واقعي: عندما يسأل المستخدم Gemini عن أدوات SEO للفرق، فإن Gemini يستخدم LLM لتكوين الجواب.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'SERP',
+        termEn: 'Search Engine Results Page',
+        brief: 'صفحة نتائج البحث التي تظهر بعد كتابة الاستعلام في جوجل أو بينج.',
+        example: 'مثال واقعي: إذا كنت في المرتبة الرابعة على كلمة مهمة، فأنت تظهر داخل SERP لكن ليس في أعلى الصفحة.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'CTR',
+        termEn: 'Click-Through Rate',
+        brief: 'نسبة النقر إلى الظهور. تعني كم شخصًا نقر على النتيجة مقارنة بعدد من شاهدوها.',
+        example: 'مثال واقعي: صفحتك ظهرت 1000 مرة في جوجل ونقر عليها 30 شخصًا. CTR هنا يساوي 3%.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Crawlability',
+        termEn: 'Crawlability',
+        brief: 'قابلية الصفحة لأن تصل إليها أدوات الزحف وتقرأها بشكل صحيح.',
+        example: 'مثال واقعي: إذا كانت الصفحة محجوبة في robots.txt أو فيها سلسلة Redirect طويلة، تصبح crawlability أسوأ.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Indexability',
+        termEn: 'Indexability',
+        brief: 'قابلية الصفحة لأن تدخل فهرس محرك البحث أصلًا بعد أن يتم زحفها.',
+        example: 'مثال واقعي: صفحة المنتج يمكن الوصول إليها، لكن فيها noindex. إذن هي قابلة للزحف لكن ليست قابلة للفهرسة.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Sitemap',
+        termEn: 'XML Sitemap',
+        brief: 'ملف يعرّف محركات البحث بعناوين الصفحات المهمة في الموقع ليسهل اكتشافها وتتبعها.',
+        example: 'مثال واقعي: إذا أطلقت قسمًا جديدًا ولم تضفه إلى الـ sitemap، قد يتأخر اكتشافه.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'robots.txt',
+        termEn: 'robots.txt',
+        brief: 'ملف تعليمات يحدد ما الذي يُسمح أو يُمنع على الزاحف الوصول إليه داخل الموقع.',
+        example: 'مثال واقعي: إذا منعت مجلد /pricing/ في robots.txt بالخطأ، فأنت تخنق صفحاتك التجارية بيدك.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'noindex',
+        termEn: 'noindex Meta Directive',
+        brief: 'تعليمة تقول لمحرك البحث: لا تضع هذه الصفحة في الفهرس.',
+        example: 'مثال واقعي: صفحة الاشتراك عليها noindex بالخطأ. النتيجة: الصفحة موجودة لكن لا تظهر في البحث.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Canonical URL',
+        termEn: 'Canonical URL',
+        brief: 'العنوان الأساسي المعتمد لنسخة الصفحة عندما توجد نسخ متعددة أو متشابهة.',
+        example: 'مثال واقعي: لديك /product و /product?ref=ad. الـ canonical يجب أن يشير إلى النسخة الأساسية.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Redirect Chain',
+        termEn: 'Redirect Chain',
+        brief: 'سلسلة تحويلات متتابعة من رابط إلى آخر قبل الوصول إلى الصفحة النهائية، وهي تضعف التجربة والزحف.',
+        example: 'مثال واقعي: old-page → temp-page → new-page. هذا Redirect Chain، وكان الأفضل تحويلًا مباشرًا واحدًا.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: '404 / 410',
+        termEn: 'HTTP 404 / 410',
+        brief: 'رموز حالة تعني أن الصفحة غير موجودة. 404 تعني غير موجودة، و410 تعني أنها أزيلت عمدًا.',
+        example: 'مثال واقعي: صفحة التسعير القديمة تعطي 404. إذا كانت ما زالت تستقبل زيارات، فهذا نزيف مباشر.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'H1',
+        termEn: 'Heading 1',
+        brief: 'العنوان الرئيسي داخل الصفحة، ويعطي إشارة قوية عن موضوعها للمستخدم وللمحرك.',
+        example: 'مثال واقعي: صفحة عن الأسعار لكن الـ H1 مكتوب فيها Welcome. هذا إضعاف واضح للمعنى.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Duplicate Title',
+        termEn: 'Duplicate Title',
+        brief: 'تكرار نفس عنوان الصفحة في أكثر من صفحة، ما يربك محركات البحث والمستخدمين.',
+        example: 'مثال واقعي: كل صفحات المنتجات عندك عنوانها Product Page فقط. هذا يجعل التمييز بينها ضعيفًا.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Thin Content',
+        termEn: 'Thin Content',
+        brief: 'صفحة تحتوي محتوى قليلًا أو ضعيف القيمة مقارنة بما يفترض أن تقدمه.',
+        example: 'مثال واقعي: صفحة خدمة مهمّة لا تحتوي إلا ثلاثة أسطر عامة. هذه صفحة Thin Content.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Stale Content',
+        termEn: 'Stale Content',
+        brief: 'محتوى لم يتجدد منذ وقت طويل وأصبح أقل صلة أو أقل دقة أو أقل تنافسية.',
+        example: 'مثال واقعي: مقال عن أدوات 2023 ما زال يحمل نفس المعلومات في 2026. هذا Stale Content.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Orphan Page',
+        termEn: 'Orphan Page',
+        brief: 'صفحة موجودة لكن لا توجد روابط داخلية تشير إليها من بقية الموقع.',
+        example: 'مثال واقعي: أنشأت صفحة ميزة جديدة ولم تربطها من أي قائمة أو مقال. صارت صفحة يتيمة.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Click Depth',
+        termEn: 'Click Depth',
+        brief: 'عدد النقرات المطلوبة للوصول إلى صفحة ما من الصفحة الرئيسية أو من نقطة مرجعية مهمة.',
+        example: 'مثال واقعي: إذا احتاج المستخدم 5 نقرات ليصل إلى صفحة الأسعار، فهذا عمق زائد وغير صحي.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Inlink Count',
+        termEn: 'Internal Inlink Count',
+        brief: 'عدد الروابط الداخلية القادمة إلى الصفحة من صفحات أخرى داخل نفس الموقع.',
+        example: 'مثال واقعي: صفحة منتج مهم لا تشير إليها إلا صفحة واحدة. هذا ضعف في Inlink Count.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Off-Page Authority',
+        termEn: 'Off-Page Authority Signals',
+        brief: 'إشارات خارج الموقع تساعد على بناء الثقة والسمعة، مثل الذكر في مواقع موثوقة أو الروابط أو الاقتباسات.',
+        example: 'مثال واقعي: عندما يذكر موقع متخصص منصتك كرابط موثوق، فهذا يرفع إشارات السلطة خارج الموقع.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Entity Identity',
+        termEn: 'Entity Identity Layer',
+        brief: 'اتساق تعريف العلامة أو الشركة أو المؤلف عبر الصفحات والمنصات بحيث تُفهم ككيان واضح.',
+        example: 'مثال واقعي: اسم الشركة يكتب بصياغات مختلفة، والشعار والوصف والروابط الرسمية غير موحدة. هذا يضعف هوية الكيان.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Retrieval Architecture',
+        termEn: 'Content Architecture for Retrieval',
+        brief: 'تصميم المحتوى وهيكلته بحيث يسهل على محرك البحث أو نموذج الذكاء الاصطناعي العثور على الأجوبة المقتبسة منه.',
+        example: 'مثال واقعي: صفحة FAQ منظمة بعناوين واضحة وأسئلة مباشرة أسهل للاقتباس من صفحة نصها كتلة واحدة.'
+      },
+      {
+        category: 'SEO & AI Visibility',
+        term: 'Competitor Gap Analysis',
+        termEn: 'Competitor and Retrieval Gap Analysis',
+        brief: 'تحليل الفجوة بين حضورك وحضور المنافسين: من يظهر؟ من يُذكر؟ من يُقتبس؟ وأين تخسر أنت؟',
+        example: 'مثال واقعي: ChatGPT يذكر 3 منافسين عند سؤال محدد ولا يذكر علامتك. هذه فجوة يجب تفسيرها.'
+      },
+
+      {
+        category: 'Product Workflow',
+        term: 'Measure → Detect → Execute → Verify',
+        termEn: 'Core Control Loop',
+        brief: 'الحلقة التشغيلية الأساسية في المنتج: تجمع البيانات، تكتشف المشاكل، تحولها إلى تنفيذ، ثم تتحقق من أن التنفيذ حصل.',
+        example: 'مثال واقعي: تزحف للموقع، تكتشف 404 في صفحة مهمة، تنشئ Work Package، ثم تعيد الزحف للتأكد من الإصلاح.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Priority Score',
+        termEn: 'Priority Score',
+        brief: 'درجة رقمية ترتب المشاكل حسب أهميتها التشغيلية بدل الاكتفاء بوصف عام مثل عالي أو منخفض.',
+        example: 'مثال واقعي: 404 في صفحة الأسعار قد يأخذ 170 نقطة، بينما عنوان ضعيف في صفحة ثانوية يأخذ 30 نقطة فقط.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Severity',
+        termEn: 'Severity Level',
+        brief: 'مستوى شدة المشكلة مثل Blocker أو Major أو Minor.',
+        example: 'مثال واقعي: 404 في صفحة دفع هو Blocker، بينما Meta Description طويل قليلًا قد يكون Minor.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Money Page',
+        termEn: 'Money Page',
+        brief: 'صفحة مرتبطة مباشرة بالقيمة التجارية مثل الأسعار أو الاشتراك أو الطلب.',
+        example: 'مثال واقعي: /pricing أو /book-demo صفحات Money Pages لأنها تمس التحويلات مباشرة.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Decision Page',
+        termEn: 'Decision Page',
+        brief: 'صفحة تساعد العميل على اتخاذ القرار، مثل صفحات المقارنة أو الشرح التفصيلي للمنتج.',
+        example: 'مثال واقعي: صفحة Compare Detektly vs Competitor هي Decision Page.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Support Page',
+        termEn: 'Support Page',
+        brief: 'صفحة دعم أو مساعدة أو أسئلة شائعة تخدم المستخدمين الحاليين أو الباحثين عن إجابات.',
+        example: 'مثال واقعي: صفحة FAQ أو صفحة التوثيق الأساسية Support Page.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Work Package',
+        termEn: 'Work Package',
+        brief: 'وحدة تنفيذ جاهزة تترجم المشكلة إلى خطوات عمل واضحة، مع معايير قبول وحالة متابعة.',
+        example: 'مثال واقعي: بدل أن تقول للمطور أصلح العنوان، تعطيه Work Package فيه الخطوات ومعيار النجاح.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Acceptance Criteria',
+        termEn: 'Acceptance Criteria',
+        brief: 'الشروط التي تحدد متى نعتبر التنفيذ مقبولًا ومكتملًا من ناحية العمل المطلوب.',
+        example: 'مثال واقعي: عنوان الصفحة يجب أن يكون موجودًا، وnoindex يجب أن يزال، والـ redirect يصبح مباشرًا.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Verification',
+        termEn: 'Verification',
+        brief: 'مرحلة التحقق بعد التنفيذ، حيث يعيد النظام فحص الصفحة ويقارن قبل وبعد ليرى هل التغيير الملحوظ حصل أم لا.',
+        example: 'مثال واقعي: بعد إصلاح صفحة 404، تعيد الزحف. إذا رجعت 200 وتم تحديث العناصر المطلوبة، تمر من Verification.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Baseline',
+        termEn: 'Baseline Snapshot',
+        brief: 'المرجع السابق الذي نقارن به الحالة الجديدة لنعرف هل تغير شيء حقًا.',
+        example: 'مثال واقعي: لا يمكنك إثبات أن العنوان تغيّر إذا لم تكن قد خزّنت نسخة سابقة من العنوان.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Diff',
+        termEn: 'Before / After Diff',
+        brief: 'الفروق بين الحالة السابقة والحالة الحالية بعد التحقق أو بعد تشغيل مقارنة ما.',
+        example: 'مثال واقعي: قبل: noindex موجود. بعد: noindex غير موجود. هذا Diff واضح.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'PendingMetric',
+        termEn: 'PendingMetric',
+        brief: 'حالة تعني أن التغيير التقني ظهر، لكن المؤشر الكمي المرتبط به لم ينضج بعد للحكم النهائي.',
+        example: 'مثال واقعي: أصلحت الصفحة اليوم، لكن CTR ما زال يحتاج وقتًا ليتحرك. هنا تكون الحالة PendingMetric.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Daily Snapshot',
+        termEn: 'Daily Snapshot',
+        brief: 'لقطة يومية تحفظ أرقامًا مهمة في زمن محدد لقياس الاتجاه مع الوقت.',
+        example: 'مثال واقعي: عدد الصفحات، عدد المشاكل، الانطباعات، النقرات، والتحويلات تُخزن كل ليلة.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Monitoring',
+        termEn: 'Scheduled Monitoring',
+        brief: 'متابعة دورية تعتمد على جدول زمني لفحص الموقع أو الأهداف أو المؤشرات.',
+        example: 'مثال واقعي: تشغيل فحص يومي لصفحات حساسة كي تكتشف if noindex أو 404 بسرعة معقولة.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Impact Analysis',
+        termEn: 'Impact Analysis',
+        brief: 'تحليل أثر التغييرات عبر مقارنة ما حدث قبل التغيير وبعده، مع التزام بعدم ادعاء السببية المطلقة.',
+        example: 'مثال واقعي: بعد إصلاح الصفحات، ارتفعت الانطباعات 12%. هذا تغير ملحوظ، لكنه ليس برهانًا وحده على السببية.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Measured Uplift',
+        termEn: 'Measured Uplift',
+        brief: 'تحسن مقاس بطريقة منظمة داخل نطاق وحدود محددة، مع توضيح أن القياس ليس دائمًا إثباتًا سببيًا كاملًا.',
+        example: 'مثال واقعي: مجموعة صفحات بعد الإصلاح أظهرت تحسنًا في الظهور مقارنة بفترة مرجعية سابقة.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Attribution Discipline',
+        termEn: 'Attribution Discipline',
+        brief: 'انضباط تحليلي يمنعك من نسبة كل تحسن لتغيير واحد دون فحص العوامل المتداخلة الأخرى.',
+        example: 'مثال واقعي: لا تقول إن الزيادة جاءت من تعديل العنوان فقط إذا تزامن معها تحديث محتوى وروابط جديدة.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'Operational Value',
+        termEn: 'Operational Value',
+        brief: 'القيمة التشغيلية التي يقدمها النظام حتى قبل إثبات أثر تجاري مباشر، مثل تسريع اكتشاف المشاكل وتحسين الانضباط التنفيذي.',
+        example: 'مثال واقعي: لو خف وقت اكتشاف مشكلة حرجة من 10 أيام إلى يوم واحد، فهذه قيمة تشغيلية واضحة.'
+      },
+      {
+        category: 'Product Workflow',
+        term: 'SLA',
+        termEn: 'Service Level Agreement',
+        brief: 'التزام زمني أو تشغيلي يحدد خلال كم من الوقت يجب التعامل مع نوع معين من الأعمال أو المشاكل.',
+        example: 'مثال واقعي: المشاكل الحرجة على الصفحات التجارية يجب أن يبدأ العمل عليها خلال 24 ساعة.'
+      },
+
+      {
+        category: 'Engineering & Architecture',
+        term: 'FastAPI',
+        termEn: 'FastAPI',
+        brief: 'إطار عمل بايثون لبناء واجهات برمجة التطبيقات والتطبيقات الخلفية بسرعة وبنية واضحة.',
+        example: 'مثال واقعي: مسارات مثل /api/issues أو /admin/scoring-config في مشروعك مبنية فوق FastAPI.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'API',
+        termEn: 'Application Programming Interface',
+        brief: 'واجهة تسمح لأنظمة أو أجزاء مختلفة من البرنامج أن تتواصل وفق مدخلات ومخرجات محددة.',
+        example: 'مثال واقعي: الواجهة الأمامية تطلب من API قائمة المشاكل بدل أن تقرأ قاعدة البيانات مباشرة.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'SQLModel',
+        termEn: 'SQLModel',
+        brief: 'طبقة نماذج في بايثون تجمع بين تعريف البيانات والتعامل مع قاعدة البيانات بطريقة منظمة.',
+        example: 'مثال واقعي: Issue و WorkPackage و Page كلها تُعرّف كنماذج SQLModel.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'SQLite',
+        termEn: 'SQLite',
+        brief: 'قاعدة بيانات خفيفة تعتمد على ملف واحد بدل خادم قاعدة بيانات مستقل.',
+        example: 'مثال واقعي: كل Tenant قد يملك ملف قاعدة منفصلًا بدل أن تشاركه جميع الشركات في جدول واحد.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Control Plane',
+        termEn: 'Control Plane',
+        brief: 'طبقة الإعدادات والإدارة العليا المشتركة بين جميع المساحات أو العملاء.',
+        example: 'مثال واقعي: إعدادات المنصة العامة وPlatform Admin تعيش في control.db.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Tenant Plane',
+        termEn: 'Tenant Plane',
+        brief: 'طبقة بيانات كل عميل أو مساحة عمل بشكل منفصل عن غيره.',
+        example: 'مثال واقعي: مشاكل ومواقع وWork Packages الخاصة بعميل A لا تُخزن في نفس ملف عميل B.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Multi-Tenancy',
+        termEn: 'Multi-Tenancy',
+        brief: 'قدرة النظام على خدمة عدة عملاء أو مساحات عمل مع فصل البيانات والتحكم بينهم.',
+        example: 'مثال واقعي: وكالة تدير 20 عميلًا من نفس المنصة دون أن يرى عميل بيانات الآخر.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Route',
+        termEn: 'HTTP Route',
+        brief: 'المسار الذي يستقبل طلبًا معينًا مثل GET أو POST وينفذ وظيفة محددة.',
+        example: 'مثال واقعي: GET /api/issues/{site_id} هو Route يعيد قائمة المشاكل لذلك الموقع.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'GET / POST',
+        termEn: 'HTTP Methods',
+        brief: 'أنواع الطلبات. GET للقراءة عادة، وPOST للإنشاء أو التشغيل أو الإرسال.',
+        example: 'مثال واقعي: GET لعرض الإعدادات، وPOST لحفظ Draft جديد في Scoring Config.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Task Queue',
+        termEn: 'Task Queue',
+        brief: 'طابور مهام يسمح بتنفيذ الأعمال الخلفية بشكل منظم بدل تنفيذ كل شيء داخل الطلب المباشر.',
+        example: 'مثال واقعي: إعادة احتساب الدرجات لكل المواقع مهمة ثقيلة، فتدخل في Task Queue.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Worker',
+        termEn: 'Background Worker',
+        brief: 'مكوّن يلتقط المهام من الطابور وينفذها في الخلفية.',
+        example: 'مثال واقعي: عند تفعيل Scoring Config جديدة، الـ Worker ينفذ rescore_site على المواقع.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'APScheduler',
+        termEn: 'Advanced Python Scheduler',
+        brief: 'مكتبة جدولة لتشغيل الأعمال في أوقات أو فترات محددة.',
+        example: 'مثال واقعي: تشغيل Snapshot يومية أو فحص Robots على جدول زمني يتم عبر APScheduler.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Jinja2',
+        termEn: 'Jinja2 Templates',
+        brief: 'محرك قوالب لتوليد صفحات HTML من بيانات الخلفية بشكل ديناميكي.',
+        example: 'مثال واقعي: صفحة issue_detail.html تُبنى من بيانات المشكلة داخل Template Jinja2.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'HTMX',
+        termEn: 'HTMX',
+        brief: 'أسلوب يجعل صفحات HTML تتحدث مع الخادم وتُحدّث أجزاء من الصفحة دون الحاجة إلى إطار واجهة ثقيل.',
+        example: 'مثال واقعي: تحديث حالة Work Package جزئيًا داخل الصفحة بدل إعادة تحميل التطبيق كله.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'CSV',
+        termEn: 'Comma-Separated Values',
+        brief: 'صيغة ملفات بسيطة لتبادل الجداول والبيانات.',
+        example: 'مثال واقعي: تصدير بيانات Search Console ثم رفعها كملف CSV إلى النظام.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Webhook',
+        termEn: 'Webhook',
+        brief: 'آلية تجعل نظامًا آخر يرسل حدثًا إلى نظامك فور وقوعه عبر طلب HTTP.',
+        example: 'مثال واقعي: عندما يسجل عميل Demo Request، يرسل النظام الخارجي Conversion Event إلى Detektly.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'GSC',
+        termEn: 'Google Search Console',
+        brief: 'منصة جوجل الرسمية لبيانات البحث مثل الانطباعات والنقرات ومتوسط الترتيب.',
+        example: 'مثال واقعي: تستورد منها impressions و clicks لتغذية Priority Score وCTR Opportunity.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Draft / Activate Flow',
+        termEn: 'Draft / Activate Flow',
+        brief: 'نمط يفرق بين حفظ إعداد كتجربة أو مسودة وبين تفعيله فعليًا على النظام.',
+        example: 'مثال واقعي: تعدل Scoring Weights أولًا كـ Draft، ثم تراجعها، ثم تضغط Activate لتطبيقها.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Score Version',
+        termEn: 'Score Version',
+        brief: 'رقم إصدار يحدد بأي نسخة من أوزان التقييم حُسبت الدرجة الحالية.',
+        example: 'مثال واقعي: إذا تغيرت الأوزان من الإصدار 2 إلى 3، فوجود Score Version يمنع الخلط بين الحسابات.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Threshold',
+        termEn: 'Detection Threshold',
+        brief: 'حد عددي إذا تجاوزه الشيء أصبح مشكلة أو إشارة.',
+        example: 'مثال واقعي: إذا كان الحد الأدنى للكلمات 300، فكل صفحة أقل من ذلك قد تسجل Thin Content.'
+      },
+      {
+        category: 'Engineering & Architecture',
+        term: 'Scoring Weights',
+        termEn: 'Scoring Weights',
+        brief: 'الأوزان الرقمية التي تحدد كم تؤثر كل إشارة داخل المعادلة النهائية للترتيب.',
+        example: 'مثال واقعي: يمكن أن تعطي Money Page Boost أعلى من Support Page حتى ترتفع أولوياتها.'
+      },
+
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Claim Registry',
+        termEn: 'Claim Registry',
+        brief: 'السجل الذي يحدد ما الذي يجوز للمنتج ادعاؤه وما الذي لا يجوز قوله لأنه غير مثبت أو خارج الحدود.',
+        example: 'مثال واقعي: إذا لم يثبت المنتج real-time monitoring، فلا يجوز لفريق المبيعات قوله لأن Claim Registry يمنعه.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Evidence Pack',
+        termEn: 'Evidence Pack',
+        brief: 'ملف أو حزمة تربط كل ادعاء مع أدلته من الكود والاختبارات والواجهات.',
+        example: 'مثال واقعي: تقول إن Verification موجودة، ثم تشير إلى الملفات والاختبارات التي تثبت ذلك.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Messaging Source of Truth',
+        termEn: 'Messaging Source of Truth',
+        brief: 'المرجع المعتمد للصياغات التسويقية والبيعية المسموح استخدامها دون تضخيم أو انحراف.',
+        example: 'مثال واقعي: هناك فرق بين قول confirms crawlable fix وبين confirms SEO success. المرجع يحسم الصياغة الصحيحة.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Regression Guard',
+        termEn: 'Claim & Wording Regression Guard',
+        brief: 'حاجز اختباري يمنع رجوع عبارات خطرة أو غير دقيقة إلى الواجهة أو الوثائق بعد أن تكون قد صُححت.',
+        example: 'مثال واقعي: إذا كتب أحدهم AI-powered بلا دليل في Template، يفشل الفحص.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Closureproof',
+        termEn: 'Closureproof Gate',
+        brief: 'طبقة إثبات واختبار تهدف للتأكد من أن الفجوات التي قيل إنها أغلقت ما زالت مغلقة فعليًا.',
+        example: 'مثال واقعي: إذا انكسر Route أو تغير سلوك يضعف Claim مغلقًا سابقًا، يفترض أن Closureproof يلتقط ذلك.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Merge Gate',
+        termEn: 'Merge Gate',
+        brief: 'شرط على الدمج إلى الفرع الرئيسي يمنع مرور التغييرات إذا لم تنجح الاختبارات المطلوبة.',
+        example: 'مثال واقعي: Pull Request لا يدمج إلى main لأن Closureproof Gate فشل.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Audit Log',
+        termEn: 'Audit Log',
+        brief: 'سجل يوثق من فعل ماذا ومتى على العمليات الحساسة أو الإدارية.',
+        example: 'مثال واقعي: من فعّل Scoring Config؟ من غيّر Role مستخدم؟ هذا يظهر في Audit Log.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Platform Audit Log',
+        termEn: 'Platform Audit Log',
+        brief: 'سجل تدقيق خاص بطبقة إدارة المنصة العليا، لا بطبقة عميل واحد.',
+        example: 'مثال واقعي: تغيير إعداد عام يؤثر على كل العملاء يجب أن يترك أثرًا في Platform Audit Log.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Boundary',
+        termEn: 'Implementation Boundary',
+        brief: 'الحد الذي يبيّن ما الذي يفعله المنتج فعلًا وما الذي لا يفعله، حتى لو بدا قريبًا منه.',
+        example: 'مثال واقعي: المنتج يتحقق من crawlable fix، لكنه لا يثبت ranking improvement. هذا Boundary مهم.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Bounded Claim',
+        termEn: 'Bounded Claim',
+        brief: 'ادعاء مضبوط بحدود دقيقة، لا فضفاض ولا مطلق.',
+        example: 'مثال واقعي: نقول supports configured answer providers بدل supports all AI engines.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'Fallback Wording',
+        termEn: 'Fallback Wording',
+        brief: 'صياغة آمنة تُستخدم عندما تكون البيانات ناقصة أو قديمة أو البيئة غير مكتملة.',
+        example: 'مثال واقعي: بدل أن تقول لا توجد مشاكل، تقول لا توجد مشاكل في آخر Crawl مكتمل.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'RBAC',
+        termEn: 'Role-Based Access Control',
+        brief: 'نظام صلاحيات يعتمد على الأدوار، بحيث لا يملك كل مستخدم نفس القدرة.',
+        example: 'مثال واقعي: Viewer يستطيع القراءة فقط، بينما Admin يغيّر الإعدادات ويشغل العمليات الحساسة.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: '403 Forbidden',
+        termEn: '403 Forbidden',
+        brief: 'استجابة تعني أن المستخدم معروف أو الطلب مفهوم، لكنه لا يملك الصلاحية للوصول أو التنفيذ.',
+        example: 'مثال واقعي: مستخدم Viewer يحاول فتح /admin/scoring-config فيحصل على 403.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'PII',
+        termEn: 'Personally Identifiable Information',
+        brief: 'بيانات شخصية يمكن أن تعرّف شخصًا بعينه، مثل الاسم الكامل أو البريد أو الهاتف.',
+        example: 'مثال واقعي: إذا وصل Webhook وفيه اسم وبريد ورقم هاتف، فهذا PII ويحتاج تعاملًا منضبطًا.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'ALLOW_PII=false',
+        termEn: 'ALLOW_PII=false',
+        brief: 'إعداد يجعل النظام يزيل حقولًا شخصية معروفة من أحداث التحويل قبل التخزين.',
+        example: 'مثال واقعي: يصل Conversion Event من نظام خارجي، فيتم حذف email وphone قبل حفظه.'
+      },
+      {
+        category: 'Governance, Trust & Quality',
+        term: 'GDPR / HIPAA / SOC 2',
+        termEn: 'Compliance Terms',
+        brief: 'أطر أو متطلبات امتثال وتنظيم. ظهورها في الوثائق لا يعني أن المنتج حاصل على هذا الامتثال تلقائيًا.',
+        example: 'مثال واقعي: قول GDPR-compliant بلا تدقيق قانوني وشواهد موثقة خطأ خطير.'
+      },
+
+      {
+        category: 'Security & Operations',
+        term: 'HMAC',
+        termEn: 'Hash-Based Message Authentication Code',
+        brief: 'آلية توقيع تساعد على التحقق من أن الرسالة لم تُعبث وأنها جاءت من جهة تعرف السر المشترك.',
+        example: 'مثال واقعي: Webhook خارجي يرسل توقيع HMAC، فيتأكد النظام أن الطلب ليس مزيفًا.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'SSRF',
+        termEn: 'Server-Side Request Forgery',
+        brief: 'ثغرة تجعل الخادم يطلب عناوين غير آمنة أو داخلية نيابة عن المهاجم.',
+        example: 'مثال واقعي: لو سمحت للمستخدم بإدخال أي URL دون قيود، قد تجبر خادمك على طلب عنوان داخلي حساس.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'CSRF',
+        termEn: 'Cross-Site Request Forgery',
+        brief: 'هجوم يخدع متصفح المستخدم لإرسال طلب غير مقصود إلى نظام هو مسجل دخوله فيه.',
+        example: 'مثال واقعي: المستخدم فاتح لوحة الإدارة، وموقع آخر يدفع المتصفح لإرسال POST خطير نيابة عنه.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'Session Cookie',
+        termEn: 'Session Cookie',
+        brief: 'ملف تعريف صغير يحتفظ بحالة تسجيل دخول المستخدم في واجهة الويب.',
+        example: 'مثال واقعي: عندما تتصفح /app دون إدخال كلمة المرور في كل صفحة، فهذا بفضل Session Cookie.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'API Key',
+        termEn: 'API Key',
+        brief: 'مفتاح سري نسبيًا يسمح للنظام الخارجي أو العميل البرمجي بالوصول إلى واجهة API ضمن حدود معينة.',
+        example: 'مثال واقعي: سكربت خارجي يرسل Conversion Events إلى API باستخدام API Key بدل جلسة متصفح.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'APIKEY_PEPPER',
+        termEn: 'API Key Pepper',
+        brief: 'قيمة سرية إضافية تُستخدم مع تخزين أو اشتقاق المفاتيح لزيادة الأمان ضد التسريب والتحليل.',
+        example: 'مثال واقعي: حتى لو تسرّب جزء من التخزين، فإن وجود Pepper يقلل فائدة التسريب للمهاجم.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'SECRET_KEY',
+        termEn: 'SECRET_KEY',
+        brief: 'سر مركزي يستخدم غالبًا في التوقيع أو الجلسات أو عناصر أمنية حساسة.',
+        example: 'مثال واقعي: استخدام SECRET_KEY افتراضي في الإنتاج قد يعرّض الجلسات أو التوقيعات للخطر.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'SCHEDULER_ENABLED',
+        termEn: 'SCHEDULER_ENABLED',
+        brief: 'إعداد تشغيل يحدد هل الجدولة الخلفية تعمل أم لا.',
+        example: 'مثال واقعي: إذا كان false فلن تحصل على Crawls مجدولة ولا Snapshots ليلية.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'Observability',
+        termEn: 'Observability',
+        brief: 'قدرة النظام على كشف ما يحدث داخله عبر السجلات، المقاييس، ومعرّفات الطلبات والتتبع.',
+        example: 'مثال واقعي: خطأ في Route معيّن يمكن ربطه بـ request_id داخل السجلات لتتبعه بسرعة.'
+      },
+      {
+        category: 'Security & Operations',
+        term: 'Environment Variable',
+        termEn: 'Environment Variable',
+        brief: 'قيمة إعداد تُحقن في بيئة التشغيل بدل تثبيتها داخل الكود.',
+        example: 'مثال واقعي: مفاتيح الأسرار أو وضع التشغيل prod/dev تحفظ في Environment Variables.'
+      }
+    ];
+
+    const state = {
+      search: localStorage.getItem('detektlyGlossarySearch') || '',
+      category: localStorage.getItem('detektlyGlossaryCategory') || 'all',
+      favoritesOnly: localStorage.getItem('detektlyGlossaryFavOnly') === '1',
+      favorites: JSON.parse(localStorage.getItem('detektlyGlossaryFavorites') || '[]')
+    };
+
+    const content = document.getElementById('content');
+    const emptyState = document.getElementById('emptyState');
+    const searchInput = document.getElementById('searchInput');
+    const categorySelect = document.getElementById('categorySelect');
+    const favoritesOnlyBtn = document.getElementById('favoritesOnly');
+    const resetFiltersBtn = document.getElementById('resetFilters');
+    const totalCount = document.getElementById('totalCount');
+    const favCount = document.getElementById('favCount');
+    const visibleCount = document.getElementById('visibleCount');
+
+    const grouped = cards.reduce((acc, item) => {
+      (acc[item.category] ||= []).push(item);
+      return acc;
+    }, {});
+
+    const categories = Object.keys(grouped);
+    categories.forEach(cat => {
+      const opt = document.createElement('option');
+      opt.value = cat;
+      opt.textContent = cat;
+      categorySelect.appendChild(opt);
+    });
+
+    function saveState() {
+      localStorage.setItem('detektlyGlossarySearch', state.search);
+      localStorage.setItem('detektlyGlossaryCategory', state.category);
+      localStorage.setItem('detektlyGlossaryFavOnly', state.favoritesOnly ? '1' : '0');
+      localStorage.setItem('detektlyGlossaryFavorites', JSON.stringify(state.favorites));
+    }
+
+    function toggleFavorite(term) {
+      const idx = state.favorites.indexOf(term);
+      if (idx >= 0) state.favorites.splice(idx, 1);
+      else state.favorites.push(term);
+      saveState();
+      render();
+    }
+
+    function cardMatches(item) {
+      const q = state.search.trim().toLowerCase();
+      const hay = `${item.term} ${item.termEn} ${item.brief} ${item.example} ${item.category}`.toLowerCase();
+      const searchOk = !q || hay.includes(q);
+      const categoryOk = state.category === 'all' || item.category === state.category;
+      const favOk = !state.favoritesOnly || state.favorites.includes(item.term);
+      return searchOk && categoryOk && favOk;
+    }
+
+    function render() {
+      searchInput.value = state.search;
+      categorySelect.value = state.category;
+      favoritesOnlyBtn.classList.toggle('btn-primary', state.favoritesOnly);
+      favoritesOnlyBtn.textContent = state.favoritesOnly ? 'إظهار كل البطاقات' : 'عرض المفضلة فقط';
+
+      content.innerHTML = '';
+      let anyVisible = false;
+      let visible = 0;
+
+      categories.forEach(category => {
+        const sectionItems = grouped[category].filter(cardMatches);
+        if (!sectionItems.length) return;
+        anyVisible = true;
+
+        const section = document.createElement('section');
+        section.className = 'section';
+        section.innerHTML = `
+          <div class="section-head" style="padding-bottom: 32px;">
+            <div>
+              <h2 style="margin-bottom: 8px;">${category}</h2>
+              <p style="color: var(--muted); margin: 0;">${sectionItems.length} بطاقة ضمن هذا المحور.</p>
+            </div>
+          </div>
+        `;
+
+        const grid = document.createElement('div');
+        grid.className = 'grid-3';
+
+        sectionItems.forEach(item => {
+          visible += 1;
+          const isFav = state.favorites.includes(item.term);
+          const article = document.createElement('article');
+          article.className = 'card anim-slide';
+          article.style.cssText = 'display:flex; flex-direction:column; gap:16px; height: 100%; box-sizing:border-box;';
+          article.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+              <div style="flex:1; width:100%;">
+                <div style="font-size:22px; font-weight:bold; line-height:1.3; color:#ffffff; margin:0;">${item.term}</div>
+                <div style="color:var(--muted); font-size:13px; font-weight:600; margin-top:6px; direction:ltr; text-align:right; display:block;">${item.termEn}</div>
+              </div>
+              <span class="badge" style="white-space:nowrap; flex-shrink:0;">${item.category}</span>
+            </div>
+            <div style="font-size:15px; line-height:1.6;"><strong>المعنى:</strong> <span style="color:var(--muted);">${item.brief}</span></div>
+            <div style="background:var(--bg-soft); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.6; color:var(--text);"><strong>مثال من الواقع:</strong> ${item.example}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; font-size:13px; color:var(--muted); gap:12px; padding-top:8px;">
+              <span>بطاقة تعليمية سريعة</span>
+              <button class="btn btn-sm fav ${isFav ? 'btn-primary' : 'btn-secondary'}" aria-label="حفظ في المفضلة" style="display:flex; align-items:center; gap:6px;">${isFav ? '<i class="ph ph-star-fill"></i> محفوظة' : '<i class="ph ph-star"></i> احفظها'}</button>
+            </div>
+          `;
+          article.querySelector('.fav').addEventListener('click', () => toggleFavorite(item.term));
+          grid.appendChild(article);
+        });
+
+        section.appendChild(grid);
+        content.appendChild(section);
+      });
+
+      totalCount.textContent = cards.length;
+      favCount.textContent = state.favorites.length;
+      visibleCount.textContent = visible;
+      emptyState.style.display = anyVisible ? 'none' : 'block';
+    }
+
+    searchInput.addEventListener('input', e => {
+      state.search = e.target.value;
+      saveState();
+      render();
+    });
+
+    categorySelect.addEventListener('change', e => {
+      state.category = e.target.value;
+      saveState();
+      render();
+    });
+
+    favoritesOnlyBtn.addEventListener('click', () => {
+      state.favoritesOnly = !state.favoritesOnly;
+      saveState();
+      render();
+    });
+
+    resetFiltersBtn.addEventListener('click', () => {
+      state.search = '';
+      state.category = 'all';
+      state.favoritesOnly = false;
+      saveState();
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

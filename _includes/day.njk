@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }} | المرحلة التأسيسية</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <style>
+    body { background: var(--bg); }
+    .day-layout { max-width: 900px; margin: 0 auto; padding: 32px 24px 80px; }
+    @media(max-width:768px){ .day-layout { padding: 24px 16px 60px; } }
+    .day-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .day-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--muted); text-decoration: none; padding: 8px 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); transition: var(--transition); }
+    .day-breadcrumb a:hover { color: var(--accent); background: rgba(255, 255, 255, 0.06); text-decoration: none; }
+    .day-hero { padding: 28px 32px; margin-bottom: 32px; background: linear-gradient(135deg, rgba(14, 23, 45, 0.98), rgba(20, 31, 58, 0.96)); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+    .day-hero .badge { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
+    .day-hero h1 { margin: 0 0 16px; font-size: 1.65rem; color: var(--text); line-height: 1.35; }
+    .day-hero .goal-box { margin-top: 16px; padding: 16px 20px; background: rgba(0,0,0,0.2); border-radius: 14px; border-right: 3px solid var(--accent); }
+    .day-hero .goal-box p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.6; }
+    .content-card { background: linear-gradient(180deg, rgba(17, 24, 51, 0.96), rgba(12, 19, 39, 0.96)); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 28px 32px; margin-bottom: 24px; }
+    .content-card h2 { margin: 0 0 16px; font-size: 1.25rem; color: var(--text); }
+    .content-card h3 { margin: 20px 0 10px; font-size: 1.08rem; color: var(--accent-2); }
+    .content-card p, .content-card li { color: var(--muted); font-size: 1rem; line-height: 1.7; margin: 0 0 12px; }
+    .content-card ul, .content-card ol { margin: 12px 0; padding-right: 24px; }
+    .content-card .quote { border-right: 3px solid var(--accent); padding: 16px 20px; margin: 16px 0; color: var(--muted); background: rgba(255, 255, 255, .02); border-radius: 0 12px 12px 0; }
+    .content-card .highlight { color: var(--accent-2); font-weight: 600; }
+    .content-card .url-example { font-family: ui-monospace, monospace; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin: 8px 0; font-size: 0.95rem; word-break: break-all; }
+    .content-card table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.95rem; }
+    .content-card th, .content-card td { padding: 12px 16px; text-align: right; border: 1px solid var(--line-soft); color: var(--muted); }
+    .content-card th { background: rgba(0,0,0,0.2); color: var(--text); }
+    .nav-days { display: flex; justify-content: space-between; gap: 16px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+    .nav-days a { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); color: var(--text); text-decoration: none; font-weight: 500; transition: var(--transition); }
+    .nav-days a:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--accent); text-decoration: none; color: var(--accent-2); }
+    .content-card .resource-list { display: grid; gap: 10px; margin-top: 12px; }
+    .content-card .resource-link { display: block; padding: 14px 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--line-soft); border-radius: 14px; color: var(--text); text-decoration: none; transition: var(--transition); }
+    .content-card .resource-link:hover { background: rgba(255,255,255,0.06); border-color: var(--accent); text-decoration: none; }
+    .content-card .resource-link strong { color: var(--accent-2); }
+    .mb-2 { margin-bottom: 8px; }
+    .mb-3 { margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="../../index.html"><img alt="Detektly Academy" src="../../brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="../../index.html">الرئيسية</a></li><li><a href="../../paths.html">المسارات</a></li><li><a href="../../exercises.html">التمارين</a></li><li><a href="../../progress.html">تقدّمي</a></li><li><a href="../../resources.html">الموارد</a></li><li><a href="../../faq.html">الأسئلة</a></li><li><a href="../../about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="../../index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="../../paths.html"><i class="ph ph-books"></i> المسارات</a><a href="../../exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="../../progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="../../resources.html"><i class="ph ph-link"></i> الموارد</a><a href="../../faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="../../about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+
+<div class="day-layout">
+  <div class="day-breadcrumb">
+    <a href="../../paths.html"><i class="ph ph-caret-right"></i> المسارات</a>
+    <a href="../../{{ curriculumUrl }}"><i class="ph ph-book-open"></i> المرحلة التأسيسية 28 يومًا</a>
+    <span style="color:var(--muted);font-size:0.9rem">اليوم {{ day }}</span>
+  </div>
+
+  <header class="day-hero">
+    <div class="badge">{{ weekTitle }}</div>
+    <h1>{{ title }}</h1>
+    <div class="goal-box"><p>{{ goal | safe }}</p></div>
+  </header>
+
+  {{ content | safe }}
+
+  <section class="content-card">
+    <h2 class="mb-3">المراجع المعتمدة</h2>
+    <p class="muted mb-2">جميع المحتويات مبنية على مصادر رسمية وموثوقة:</p>
+    <div class="resource-list">
+      <a class="resource-link" href="https://developers.google.com/search/docs/fundamentals/how-search-works" target="_blank" rel="noopener"><strong>Google: How Search Works</strong><span class="muted text-sm" style="display:block;margin-top:4px">كيف يعمل البحث — الزحف والفهرسة والعرض</span></a>
+      <a class="resource-link" href="https://developers.google.com/search/docs/essentials" target="_blank" rel="noopener"><strong>Google: Search Essentials</strong><span class="muted text-sm" style="display:block;margin-top:4px">أساسيات الظهور في البحث</span></a>
+      <a class="resource-link" href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank" rel="noopener"><strong>Google: SEO Starter Guide</strong><span class="muted text-sm" style="display:block;margin-top:4px">دليل البداية في تحسين محركات البحث</span></a>
+      <a class="resource-link" href="https://developers.google.com/search/docs/monitor-debug/search-console-start" target="_blank" rel="noopener"><strong>Google: Search Console</strong><span class="muted text-sm" style="display:block;margin-top:4px">أساسيات أداة مراقبة أداء البحث</span></a>
+      <a class="resource-link" href="https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a" target="_blank" rel="noopener"><strong>Bing: Webmaster Guidelines</strong><span class="muted text-sm" style="display:block;margin-top:4px">إرشادات بينغ لأصحاب المواقع</span></a>
+      <a class="resource-link" href="https://schema.org/docs/documents.html" target="_blank" rel="noopener"><strong>Schema.org: Documentation</strong><span class="muted text-sm" style="display:block;margin-top:4px">وثائق البيانات المنظمة</span></a>
+    </div>
+  </section>
+
+  <div class="nav-days">
+    {% set sorted = collections.foundation28 %}
+    {% set prevDay = sorted[day - 2] %}
+    {% set nextDay = sorted[day] %}
+    {% if prevDay %}
+    <a href="{{ prevDay.fileSlug }}.html">{{ prevDay.data.title }} <i class="ph ph-caret-right"></i></a>
+    {% else %}
+    <span></span>
+    {% endif %}
+    {% if nextDay %}
+    <a href="{{ nextDay.fileSlug }}.html">اليوم {{ nextDay.data.day }} — {{ nextDay.data.titleShort }} <i class="ph ph-caret-left"></i></a>
+    {% else %}
+    <span></span>
+    {% endif %}
+  </div>
+</div>
+
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong> | مبنية على مراجع رسمية</p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="../../js/navigation.js"></script>
+</body>
+</html>

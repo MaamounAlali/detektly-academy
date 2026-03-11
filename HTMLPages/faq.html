@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>الأسئلة الشائعة — Detektly Academy</title>
+<meta content="إجابات على الأسئلة الأكثر شيوعًا حول Detektly Academy والمسارات التعليمية." name="description"/>
+<link href="brand/logo/fav.ico" rel="icon" type="image/x-icon"/>
+<link href="css/styles.css" rel="stylesheet"/>
+<style>
+    .faq-item{background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;cursor:pointer;font-weight:600;font-size:1rem;transition:background .2s}
+    .faq-q:hover{background:rgba(255,255,255,.03)}
+    .faq-arrow{transition:transform .3s;font-size:.85rem;color:var(--muted)}
+    .faq-item.open .faq-arrow{transform:rotate(180deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+    .faq-item.open .faq-a{max-height:500px;padding:0 22px 18px}
+    .faq-a p{color:var(--muted);font-size:.95rem;margin:0}
+  </style>
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="index.html">الرئيسية</a></li><li><a href="paths.html">المسارات</a></li><li><a href="exercises.html">التمارين</a></li><li><a href="progress.html">تقدّمي</a></li><li><a href="resources.html">الموارد</a></li><li><a href="faq.html">الأسئلة</a></li><li><a href="about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="paths.html"><i class="ph ph-books"></i> المسارات</a><a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="resources.html"><i class="ph ph-link"></i> الموارد</a><a href="faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+<main class="wrap page-content">
+<section class="hero">
+<div class="hero-content">
+<div class="eyebrow"><i class="ph ph-question"></i> الأسئلة الشائعة</div>
+<h1>إجابات على <span class="text-gradient">أسئلتك</span></h1>
+<p>كل ما تحتاج معرفته عن المنصة، المسارات التعليمية، وكيفية الاستفادة القصوى من رحلتك التعليمية.</p>
+</div>
+</section>
+<!-- Platform FAQs -->
+<section class="section">
+<h2 class="mb-3">عن المنصة</h2>
+<div id="faqPlatform">
+<div class="faq-item">
+<div class="faq-q"><span>ما هي Detektly Academy؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p><strong>Detektly Academy</strong> هي المنصة التعليمية التابعة لـ <strong>Detektly</strong> — منصة عمليات SEO التي تكتشف مشاكل الظهور، ترتب الأولويات، تحول النتائج إلى مهام تنفيذية، وتتحقق من تطبيق الإصلاحات. Detektly Academy تأخذك من الصفر عبر مسارات متدرجة لإتقان SEO وGEO وبناء استراتيجية ظهور شاملة.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>هل المنصة مجانية؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>نعم، Detektly Academy مجانية بالكامل. جميع المحتويات مبنية على مراجع رسمية ومتاحة للجميع. للاستفادة من أداة Detektly لعمليات SEO، يمكنك زيارة الموقع الرئيسي.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>هل أحتاج إلى تسجيل حساب؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>لا. يتم حفظ تقدمك محليًا في المتصفح باستخدام localStorage. لا حاجة لتسجيل أو إنشاء حساب.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>هل يضيع تقدمي إذا مسحت بيانات المتصفح؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>نعم، لأن التقدم يُحفظ محليًا. ننصح باستخدام زر "تصدير الملاحظات" المتاح في كل مسار لحفظ نسخة من تقدمك وملاحظاتك.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>ما المصادر التي تعتمد عليها المنصة؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>Google Search Central (How Search Works, Search Essentials, SEO Starter Guide, Search Console)، Bing Webmaster Guidelines، وSchema.org Documentation. بالإضافة إلى ورقة GEO البحثية من arXiv، وخبرات فريق Detektly في عمليات SEO.</p></div>
+</div>
+</div>
+</section>
+<!-- Learning Path FAQs -->
+<section class="section">
+<h2 class="mb-3">المسارات التعليمية</h2>
+<div id="faqPaths">
+<div class="faq-item">
+<div class="faq-q"><span>من أين أبدأ؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>إذا كنت مبتدئًا تمامًا، ابدأ بالمرحلة التأسيسية (28 يومًا). إذا كان لديك فهم أساسي للويب والبحث، يمكنك البدء مباشرة بمنهج 42 يومًا.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>كم ساعة أحتاج يوميًا؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>بين 45 و90 دقيقة يوميًا حسب المسار. المرحلة التأسيسية تحتاج 45-75 دقيقة، ومنهج 42 يومًا يحتاج 60-90 دقيقة.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>هل يمكنني تخطي المرحلة التأسيسية؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>يمكنك ذلك إذا كنت تستطيع الإجابة عن هذه الأسئلة من ذاكرتك: ما هو الموقع والصفحة والرابط، كيف يعمل الزحف والفهرسة والظهور، ما هي نية البحث، وما هي Search Console. إذا تعثرت في أي منها، ابدأ من التأسيس.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>هل يجب أن أدرس المسارات بالترتيب؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>نعم، المسارات مصممة لتُدرس بالترتيب. كل مسار يبني على المسار السابق. التأسيس <i class="ph ph-arrow-left"></i> SEO/GEO <i class="ph ph-arrow-left"></i> الأدوات <i class="ph ph-arrow-left"></i> الاستراتيجية.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>ماذا لو لم أفهم يومًا معينًا؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>أعد قراءة المادة وحاول شرحها بكلماتك. إذا عجزت عن شرح المفهوم لشخص آخر، فأنت لم تفهمه بعد. لا تتقدم قبل الفهم.</p></div>
+</div>
+</div>
+</section>
+<!-- Technical FAQs -->
+<section class="section">
+<h2 class="mb-3">أسئلة تقنية</h2>
+<div id="faqTech">
+<div class="faq-item">
+<div class="faq-q"><span>ما الفرق بين SEO و GEO؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>SEO (Search Engine Optimization) هو تحسين الظهور في نتائج محركات البحث التقليدية مثل Google وBing. GEO (Generative Engine Optimization) هو تحسين الظهور في إجابات محركات الذكاء الاصطناعي مثل ChatGPT وGemini. GEO ليس بديلًا عن SEO، بل طبقة إضافية فوقه.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>هل أحتاج خبرة برمجية؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>لا. المنصة مصممة لغير التقنيين تمامًا. ستتعلم المفاهيم والتحليل والاستراتيجية دون الحاجة لكتابة أي كود.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>ما هي البيانات المنظمة (Structured Data)؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>هي طريقة لوصف محتوى صفحتك بتنسيق يفهمه محرك البحث آليًا. مثلًا: تخبره أن هذه الصفحة مقال، وأن كاتبه اسمه كذا، ونُشر في تاريخ كذا. هذا يزيد فرص ظهورك في نتائج منسقة (Rich Results).</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>ما هو Search Visibility Strategist؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>هو الشخص القادر على بناء استراتيجية ظهور شاملة لأي موقع: تحليل الفجوات، بناء الخطة، تشخيص المشاكل، وقياس الأثر — عبر محركات البحث التقليدية ومحركات الإجابة التوليدية معًا.</p></div>
+</div>
+</div>
+</section>
+<!-- Career FAQs -->
+<section class="section">
+<h2 class="mb-3">المسار المهني</h2>
+<div id="faqCareer">
+<div class="faq-item">
+<div class="faq-q"><span>هل يمكنني العمل في مجال SEO بعد إتمام المسارات؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>المسارات تبني أساسًا نظريًا وتطبيقيًا قويًا. لبدء العمل المهني، ستحتاج إلى ممارسة عملية على مواقع حقيقية وبناء مشاريع تطبيقية. مشروع التخرج في المسار الأخير مصمم ليكون بداية هذه الممارسة.</p></div>
+</div>
+<div class="faq-item">
+<div class="faq-q"><span>كم يستغرق إتمام كل المسارات؟</span><span class="faq-arrow"><i class="ph ph-caret-down"></i></span></div>
+<div class="faq-a"><p>إجمالي 98 يومًا تعليميًا. إذا درست يوميًا ستنتهي في حوالي 3.5 أشهر. لكن لا تتسرع — الفهم العميق أهم من السرعة.</p></div>
+</div>
+</div>
+</section>
+</main>
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong></p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="js/navigation.js"></script>
+<script>
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

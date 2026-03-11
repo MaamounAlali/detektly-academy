@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>استراتيجية الظهور الشامل — Search Visibility Path</title>
+  <meta name="description" content="المسار النهائي: بناء استراتيجية ظهور متكاملة عبر محركات البحث والذكاء الاصطناعي.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    aside{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;background:rgba(10,16,32,.82);border-left:1px solid var(--line);backdrop-filter:blur(16px);padding:20px}
+    .side-brand{padding:18px;margin-bottom:16px;background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .side-brand h1{margin:0 0 8px;font-size:1.2rem;line-height:1.35}
+    .side-brand p{margin:0;color:var(--muted);font-size:.9rem}
+    .side-section{margin-top:16px}
+    .side-title{font-size:.82rem;color:var(--muted);margin:0 0 8px}
+    .side-nav{display:flex;flex-direction:column;gap:6px}
+    .side-link{display:block;padding:10px 12px;border-radius:12px;color:var(--text);background:rgba(255,255,255,.02);text-decoration:none;font-size:.92rem}
+    .side-link:hover{background:rgba(255,255,255,.05);text-decoration:none}
+    .side-link small{display:block;color:var(--muted);font-size:.82rem}
+    .main-area{padding:24px 28px 48px}
+    .w-stat{background:rgba(255,255,255,.03);padding:12px;border-radius:14px;border:1px solid var(--line-soft)}
+    .w-stat strong{display:block;font-size:1.1rem}
+    .w-stat span{display:block;color:var(--muted);font-size:.82rem}
+    .week-card{background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:20px 0}
+    .week-header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;cursor:pointer}
+    .week-header h3{margin:0;font-size:1.2rem}
+    .week-meta{min-width:160px;text-align:left}
+    .day-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+    .day-card{background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;position:relative}
+    .day-card h4{margin:0 0 8px;font-size:1rem;padding-left:80px}
+    .day-badge{position:absolute;left:16px;top:14px;background:#0f1a38;border:1px solid var(--line);padding:5px 10px;border-radius:var(--radius-pill);font-size:.8rem;color:var(--muted)}
+    .day-card p,.day-card li{color:var(--muted);font-size:.92rem}
+    .day-card ul{margin:8px 0;padding-right:20px}
+    .day-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+    .check{display:flex;align-items:center;gap:8px;font-size:.9rem}
+    .check input{width:18px;height:18px}
+    .notes{margin-top:12px}
+    .notes input{width:100%;background:#0b1328;color:var(--text);border-radius:12px;padding:10px 12px;border:1px solid var(--line);font:inherit}
+    .mini-progress{height:8px;background:#091327;border-radius:var(--radius-pill);overflow:hidden;border:1px solid var(--line);margin-top:8px}
+    .mini-progress>div{height:100%;background:linear-gradient(90deg,var(--accent),var(--success))}
+    .hero-section{padding:22px;margin-bottom:18px;background:linear-gradient(180deg,rgba(17,24,51,.96),rgba(12,19,39,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero-section h2{margin:0 0 10px;font-size:1.5rem}
+    .hero-section p{margin:0;color:var(--muted)}
+    .quote{border-right:3px solid var(--accent);padding-right:12px;color:var(--muted);margin:16px 0}
+    .hidden{display:none !important}
+    @media(max-width:1100px){
+      .app{grid-template-columns:1fr}
+      aside{position:relative;height:auto;border-left:none;border-bottom:1px solid var(--line)}
+      .day-grid{grid-template-columns:1fr}
+    }
+  
+    .app { padding-top: 20px; }
+</style>
+</head>
+<body>
+<nav class="main-nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img alt="Detektly Academy" src="brand/logo/logo.png" style="height:38px;width:auto"/></a><ul class="nav-links"><li><a href="index.html">الرئيسية</a></li><li><a href="paths.html">المسارات</a></li><li><a href="exercises.html">التمارين</a></li><li><a href="progress.html">تقدّمي</a></li><li><a href="resources.html">الموارد</a></li><li><a href="faq.html">الأسئلة</a></li><li><a href="about.html">عن المنصة</a></li></ul><button aria-label="القائمة" class="nav-toggle" id="navToggle"><i class="ph ph-list"></i></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><button class="mobile-menu-close" id="mobileClose"><i class="ph ph-x"></i></button><a href="index.html"><i class="ph ph-house"></i> الرئيسية</a><a href="paths.html"><i class="ph ph-books"></i> المسارات</a><a href="exercises.html"><i class="ph ph-pencil-simple"></i> التمارين</a><a href="progress.html"><i class="ph ph-chart-bar"></i> تقدّمي</a><a href="resources.html"><i class="ph ph-link"></i> الموارد</a><a href="faq.html"><i class="ph ph-question"></i> الأسئلة</a><a href="about.html"><i class="ph ph-info"></i> عن المنصة</a></div>
+
+<div class="app">
+  <aside>
+    <div class="side-brand">
+      <h1><i class="ph ph-target"></i> استراتيجية الظهور الشامل</h1>
+      <p>14 يومًا لبناء إطار عمل استراتيجي متكامل للظهور في البحث والذكاء الاصطناعي.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
+        <div class="w-stat"><strong id="doneCount">0</strong><span>أيام مكتملة</span></div>
+        <div class="w-stat"><strong id="remainingCount">14</strong><span>أيام متبقية</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="globalProgress" style="width:0%"></div></div>
+      <span class="muted" style="font-size:.85rem" id="progressLabel">0%</span>
+    </div>
+    <div class="side-section">
+      <div class="side-title">التنقل السريع</div>
+      <div class="side-nav" id="weekNav"></div>
+    </div>
+    <div class="side-section">
+      <div class="side-title">إجراءات</div>
+      <div class="side-nav">
+        <a href="#" class="side-link" id="expandAll">فتح كل الأسابيع</a>
+        <a href="#" class="side-link" id="collapseAll">طي كل الأسابيع</a>
+        <a href="#" class="side-link" id="resetProgress">تصفير التقدم</a>
+        <a href="index.html" class="side-link"><i class="ph ph-arrow-left"></i> العودة للرئيسية</a>
+      </div>
+    </div>
+  </aside>
+  <main class="main-area">
+    <div style="margin-bottom: 24px; display: flex; align-items: center;">
+      <a href="paths.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 500; padding: 8px 16px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line-soft); color: var(--muted); text-decoration: none; transition: all 0.3s ease;">
+        <i class="ph ph-caret-right" style="font-size: 1.1rem;"></i>
+        العودة إلى المسارات التعليمية
+      </a>
+    </div>
+
+    
+
+    <section class="hero-section">
+      <h2>من التكتيك إلى الاستراتيجية</h2>
+      <p>هذا المسار يجمع كل ما تعلمته ويحوّله إلى إطار عمل استراتيجي. تحليل الفجوات، بناء الخطة، قياس الأثر، ومشروع تخرج شامل.</p>
+      <div class="pill-row" style="margin-top:12px">
+        <span class="pill">Gap Analysis (تحليل الفجوات)</span>
+        <span class="pill">Visibility Plan (خطة الظهور)</span>
+        <span class="pill">Impact Measurement (قياس الأثر)</span>
+        <span class="pill">Capstone Project (مشروع التخرج)</span>
+      </div>
+    </section>
+
+    <div class="hero-section quote">
+      النجاح هنا ليس أن تعرف المصطلحات. النجاح أن تنظر إلى موقع وتقول بدقة: هذه الفجوة الأهم، هذا السبب، هذه الأولوية، وهذا هو الأثر المتوقع — ثم تقيسه فعلًا.
+    </div>
+
+    <div id="weeksContainer"></div>
+    <div style="height:36px"></div>
+  </main>
+</div>
+
+<script>
+const curriculum = [
+  {
+    week:1, title:'الأسبوع 1 — التفكير الاستراتيجي وتحليل الفجوات',
+    intro:'الانتقال من أفعال تكتيكية إلى رؤية استراتيجية شاملة.',
+    days:[
+      {day:1,title:'من تكتيك إلى استراتيجية',goal:'تفهم الفرق الجوهري بين التكتيك (إصلاح عنوان صفحة) والاستراتيجية (رؤية شاملة للظهور).',tasks:['اكتب الفرق بين التكتيك والاستراتيجية بأمثلة عملية من SEO وGEO.','حلل موقعًا واحدًا: هل مشاكله تكتيكية أم استراتيجية؟'],output:'ورقة: الفرق بين التكتيك والاستراتيجية في الظهور الرقمي.'},
+      {day:2,title:'الرؤية الشاملة للظهور',goal:'تبني نظرة شاملة تجمع SEO التقليدي + GEO + الأدوات + الاستراتيجية.',tasks:['ارسم خريطة ذهنية تربط كل المفاهيم التي تعلمتها.','اكتب ملخصًا بعنوان: ما معنى أن تكون مرئيًا في 2025.'],output:'خريطة ذهنية + ملخص من صفحة واحدة.'},
+      {day:3,title:'Competitor Gap Analysis — تحليل فجوات المنافسين',goal:'تتعلم كيف تقارن ظهورك بالمنافسين.',tasks:['اختر 3 منافسين في مجال واحد.','قارن: الهيكل، المحتوى، البيانات المنظمة، الظهور في البحث، الذكر في AI.'],output:'جدول مقارنة تنافسية من 3 أعمدة.'},
+      {day:4,title:'Content Gap — فجوة المحتوى',goal:'تحدد المواضيع التي يغطيها المنافسون ولا تغطيها أنت.',tasks:['اجمع 30 استعلامًا يظهر فيه المنافسون ولا تظهر فيه.','صنّف هذه الاستعلامات حسب النية ونوع الصفحة المناسب.'],output:'قائمة فجوات محتوى مصنفة ومرتبة بالأولوية.'},
+      {day:5,title:'AI Gap — فجوة الظهور في الذكاء الاصطناعي',goal:'تكتشف أين يتم ذكر المنافسين في إجابات AI ولا يتم ذكرك.',tasks:['اسأل ChatGPT وGemini وBing Chat نفس الأسئلة.','سجّل من يُذكر ومن يُستشهد به ومن لا يظهر.'],output:'تقرير فجوة AI من صفحة واحدة.'},
+      {day:6,title:'بناء أولويات التنفيذ',goal:'ترتب الفجوات حسب الأثر المتوقع وسهولة التنفيذ.',tasks:['أنشئ مصفوفة: أثر عالي/منخفض × سهولة عالية/منخفضة.','ضع كل فجوة في المربع المناسب.'],output:'مصفوفة أولويات التنفيذ.'},
+      {day:7,title:'مراجعة واختبار الأسبوع الأول',goal:'تثبيت مفاهيم التحليل الاستراتيجي.',tasks:['اكتب ملخص الأسبوع في صفحة واحدة.','اشرح لشخص آخر: كيف تحلل فجوات الظهور لموقع.'],output:'ملخص أسبوعي + شرح شفهي.'}
+    ]
+  },
+  {
+    week:2, title:'الأسبوع 2 — بناء الخطة وقياس الأثر والمشروع النهائي',
+    intro:'من التحليل إلى الخطة إلى القياس إلى المشروع النهائي.',
+    days:[
+      {day:8,title:'بناء خطة ظهور متكاملة',goal:'تحوّل نتائج التحليل إلى خطة عمل واضحة.',tasks:['اكتب خطة من 3 صفحات تتضمن: الأهداف، الإجراءات، الجدول الزمني، المسؤوليات.','حدد KPIs (مؤشرات الأداء) لكل هدف.'],output:'خطة ظهور متكاملة مع KPIs.'},
+      {day:9,title:'تحديد SLAs ومعايير النجاح',goal:'تضع معايير واضحة للنجاح وأوقات الاستجابة المتوقعة.',tasks:['حدد SLA لكل نوع مهمة: إصلاح فهرسة، تحسين عنوان، إضافة بيانات منظمة.','اكتب معايير النجاح المتوقعة بعد 30 و60 و90 يومًا.'],output:'وثيقة SLAs ومعايير نجاح.'},
+      {day:10,title:'Impact Analysis — تحليل الأثر',goal:'تتعلم كيف تقيس الأثر الفعلي لتحسيناتك.',tasks:['اكتب منهجية لقياس الأثر: قبل/بعد، المقاييس المستخدمة، فترة الملاحظة.','طبقها على مثال حقيقي أو افتراضي.'],output:'منهجية قياس أثر من صفحة واحدة.'},
+      {day:11,title:'Attribution Discipline — انضباط الإسناد',goal:'تفرّق بين الارتباط والسببية في قياس الأداء.',tasks:['اكتب 5 أمثلة على كيف يمكن أن تُساء قراءة تحسّن الأداء.','ضع 5 قواعد لانضباط الإسناد.'],output:'وثيقة انضباط الإسناد.'},
+      {day:12,title:'مشروع التخرج (الجزء 1) — التحليل والتخطيط',goal:'تبدأ مشروع تخرج شامل على موقع حقيقي.',tasks:['اختر موقعًا حقيقيًا.','أجرِ تحليل فجوات كامل: SEO + GEO + أدوات.','اكتب الجزء الأول: التحليل والنتائج.'],output:'الجزء الأول من مشروع التخرج.'},
+      {day:13,title:'مشروع التخرج (الجزء 2) — الخطة والتنفيذ',goal:'تكتب خطة التنفيذ وتوصيات مفصلة.',tasks:['اكتب خطة تنفيذ مفصلة بناءً على تحليلك.','حدد الأولويات والجدول الزمني.','اكتب تقرير توصيات من 3 صفحات.'],output:'الجزء الثاني: خطة التنفيذ والتوصيات.'},
+      {day:14,title:'مشروع التخرج (الجزء 3) — التقديم النهائي',goal:'تنهي المشروع وتقدم وثيقة التخرج.',tasks:['اجمع كل الأجزاء في وثيقة واحدة من 6-8 صفحات.','أضف ملخصًا تنفيذيًا في الصفحة الأولى.','اكتب: ماذا تعلمت وكيف ستستمر في التطبيق.'],output:'مشروع تخرج كامل — Search Visibility Strategy Document.'}
+    ]
+  }
+];
+
+const storageKey='svp-strategy-path';
+let state;
+const defaultState={completed:{},notes:{},collapsedWeeks:{}};
+
+function loadState(){try{return{...defaultState,...JSON.parse(localStorage.getItem(storageKey)||'{}')};}catch(e){return structuredClone(defaultState);}}
+function saveState(){localStorage.setItem(storageKey,JSON.stringify(state));}
+function escapeHtml(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
+function weekCompletion(w){const t=w.days.length,d=w.days.filter(x=>state.completed[x.day]).length;return{done:d,total:t,pct:Math.round(d/t*100)};}
+function globalCompletion(){const t=curriculum.reduce((a,w)=>a+w.days.length,0);const d=curriculum.flatMap(w=>w.days).filter(x=>state.completed[x.day]).length;return{done:d,total:t,pct:Math.round(d/t*100)};}
+
+function render(){
+  state=loadState();
+  const g=globalCompletion();
+  document.getElementById('doneCount').textContent=g.done;
+  document.getElementById('remainingCount').textContent=g.total-g.done;
+  document.getElementById('globalProgress').style.width=g.pct+'%';
+  document.getElementById('progressLabel').textContent=g.pct+'%';
+  const nav=document.getElementById('weekNav');nav.innerHTML='';
+  curriculum.forEach(w=>{const c=weekCompletion(w);const a=document.createElement('a');a.href='#week-'+w.week;a.className='side-link';a.innerHTML=`<strong>${w.title}</strong><small>${c.done}/${c.total} أيام</small>`;nav.appendChild(a);});
+  const container=document.getElementById('weeksContainer');container.innerHTML='';
+  curriculum.forEach(w=>{
+    const c=weekCompletion(w);const collapsed=state.collapsedWeeks[w.week]??false;
+    const sec=document.createElement('section');sec.className='week-card';sec.id='week-'+w.week;
+    sec.innerHTML=`<div class="week-header" data-toggle="${w.week}"><div><h3>${w.title}</h3><p class="muted">${w.intro}</p></div><div class="week-meta"><div class="muted">${c.done}/${c.total} مكتمل</div><div class="mini-progress"><div style="width:${c.pct}%"></div></div></div></div><div class="${collapsed?'hidden':''}" id="wc-${w.week}"><div class="day-grid"></div></div>`;
+    const grid=sec.querySelector('.day-grid');
+    w.days.forEach(d=>{
+      const done=!!state.completed[d.day];
+      const art=document.createElement('article');art.className='day-card';
+      art.innerHTML=`<span class="day-badge">اليوم ${d.day}</span><h4>${d.title}</h4><p><strong>الهدف:</strong> ${d.goal}</p><p><strong>التمرين:</strong></p><ul>${d.tasks.map(t=>`<li>${t}</li>`).join('')}</ul><p><strong>المخرج:</strong> ${d.output}</p><div class="day-actions"><label class="check"><input type="checkbox" data-day="${d.day}" ${done?'checked':''}> تم هذا اليوم</label></div><div class="notes"><input type="text" placeholder="ملاحظاتك" data-note="${d.day}" value="${escapeHtml((state.notes[d.day])||'')}"></div>`;
+      grid.appendChild(art);
+    });
+    container.appendChild(sec);
+  });
+  bindEvents();
+}
+
+function bindEvents(){
+  document.querySelectorAll('[data-day]').forEach(el=>{if(el.type==='checkbox')el.onchange=e=>{state.completed[Number(e.target.dataset.day)]=e.target.checked;saveState();render();};});
+  document.querySelectorAll('[data-note]').forEach(el=>{el.oninput=e=>{state.notes[Number(e.target.dataset.note)]=e.target.value;saveState();};});
+  document.querySelectorAll('[data-toggle]').forEach(el=>{el.onclick=()=>{const w=Number(el.dataset.toggle);state.collapsedWeeks[w]=!state.collapsedWeeks[w];saveState();render();};});
+  document.getElementById('expandAll').onclick=e=>{e.preventDefault();curriculum.forEach(w=>state.collapsedWeeks[w.week]=false);saveState();render();};
+  document.getElementById('collapseAll').onclick=e=>{e.preventDefault();curriculum.forEach(w=>state.collapsedWeeks[w.week]=true);saveState();render();};
+  document.getElementById('resetProgress').onclick=e=>{e.preventDefault();if(!confirm('سيتم حذف كل التقدم. متابعة؟'))return;localStorage.removeItem(storageKey);state=structuredClone(defaultState);render();};
+}
+render();
+</script>
+
+<footer class="main-footer"><div class="footer-inner"><p>Detektly Academy — المنصة التعليمية من <strong>Detektly</strong> | مبنية على مراجع رسمية</p><div class="flex gap-2"><a class="text-sm font-bold" href="https://detektly.com" target="_blank">detektly.com</a></div></div></footer>
+<script src="js/navigation.js"></script>
+</body>
+</html>
