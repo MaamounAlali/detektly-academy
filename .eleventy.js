@@ -5,8 +5,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("brand");
   // للنشر على academy.detektly.com عبر GitHub Pages
   eleventyConfig.addPassthroughCopy("CNAME");
-  // صفحات الجذر الثابتة
-  [
+  // Copy HTMLPages/* to site root so GitHub Pages serves index.html at /
+  const rootPages = [
     "index.html",
     "paths.html",
     "exercises.html",
@@ -20,7 +20,10 @@ module.exports = function (eleventyConfig) {
     "cards.html",
     "seo_geo_foundation_28_day_curriculum.html",
     "seo_geo_42_day_curriculum.html",
-  ].forEach((f) => eleventyConfig.addPassthroughCopy(f));
+  ];
+  rootPages.forEach((f) => {
+    eleventyConfig.addPassthroughCopy({ ["HTMLPages/" + f]: f });
+  });
 
   // مجموعة أيام المسار التأسيسي (لتنقل السابق/التالي)
   eleventyConfig.addCollection("foundation28", function (collectionApi) {
